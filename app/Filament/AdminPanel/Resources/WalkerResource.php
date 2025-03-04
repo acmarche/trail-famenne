@@ -23,6 +23,16 @@ class WalkerResource extends Resource
 
     protected static ?string $navigationIcon = 'tabler-walk';
 
+    public static function getNavigationLabel(): string
+    {
+        return 'Marcheurs';
+    }
+
+    public static function getModelLabel(): string
+    {
+        return 'Marcheurs';
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -76,16 +86,15 @@ class WalkerResource extends Resource
                     ->badge()->size('xxl')
                     ->color(fn(TshirtEnum $state): string => $state->getColor())
                     ->icon(fn(TshirtEnum $state): string => $state->getIcon()),
-                Tables\Columns\TextColumn::make('registration_id')
-                    ->state(fn(Registration $x) => $x->email)
-                    ->searchable(),
-                IconColumn::make('registration.payement_date')
-                    ->boolean(),
+                Tables\Columns\TextColumn::make('registration.payement_date')
+                    ->label('Date d\'inscription')
+                    ->state(function ( $state) {
+                       dd($state);
+                        return $state;
+                    }),
                 Tables\Columns\TextColumn::make('city')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('country')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('club_name')
                     ->searchable(),
             ])
             ->filters([
