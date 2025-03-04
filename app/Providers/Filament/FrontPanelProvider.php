@@ -78,7 +78,7 @@ class FrontPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                SetLocaleLanguage::class
+                SetLocaleLanguage::class,
             ])
             ->authMiddleware([
                 //   Authenticate::class,
@@ -86,8 +86,9 @@ class FrontPanelProvider extends PanelProvider
             ->navigationItems([
                 NavigationItem::make('dashboard admin')
                     ->icon('heroicon-o-cog-6-tooth')
-                    ->label(fn(): string => __('messages.navigation.admin.dashboard'))
+                    ->label(fn(): string => __('messages.navigation.admin.dashboard.label'))
                     ->url('/admin')
+                    ->group('Administration')
                     ->visible(function (): bool {
                         $isAdmin = auth()->user()?->hasRole(Role::ROLE_ADMIN);
 
