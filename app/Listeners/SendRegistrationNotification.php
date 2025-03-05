@@ -42,7 +42,8 @@ class SendRegistrationNotification
         }
 
         try {
-            Mail::to(new Address('jf@marche.be', $registration->email))->send(new RegistrationCompleted($registration));
+            Mail::to(new Address($registration->email, $registration->email))
+                ->send(new RegistrationCompleted($registration));
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
