@@ -32,9 +32,21 @@ class RegistrationComplete extends Page
          * @var Registration $this ->record
          */
         $this->record = $this->resolveRecord($record);
-        $this->qrCode = self::convertToBase64(QrCodeGenerator::make()
+        //todo extract
+        $qrCodePath = QrCodeGenerator::make()
             ->id($this->record->id)
-            ->qrCodePath());
+            ->qrCodePath();
+        if (!$qrCodePath) {
+            try {
+                QrCodeGenerator::generateAndSaveIt($this->record);
+            } catch (\Exception $e) {
+                dd($e->getMessage());
+            }
+        }
+        $qrCodePath = QrCodeGenerator::make()
+            ->id($this->record->id)
+            ->qrCodePath();
+        $this->qrCode = self::convertToBase64($qrCodePath);
         $fileScanning = public_path('images/qr-code-scanning2.jpg');
         $this->qrCodeScanning = self::convertToBase64($fileScanning);
         $this->message = 'coucou';
