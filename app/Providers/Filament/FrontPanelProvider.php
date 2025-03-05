@@ -42,6 +42,9 @@ class FrontPanelProvider extends PanelProvider
             ->default()
             ->id('front')
             ->path('front')
+            ->darkMode(false)
+            ->sidebarFullyCollapsibleOnDesktop()
+            ->sidebarCollapsibleOnDesktop(true)
             ->colors([
                 'primary' => Color::Pink,
             ])

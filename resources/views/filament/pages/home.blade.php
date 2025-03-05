@@ -1,12 +1,9 @@
 <x-filament-panels::page>
-    <section class="px-12 flex mx-auto flex-col gap-3 items-start justify-items-center">
-        <h2 class="text-green-400 font-bold text-2xl">
-
-        </h2>
+    <section class="px-2 lg:px-12 flex mx-auto flex-col gap-3 items-start justify-items-center w-full lg:w-auto">
 
         @include('filament.pages.parts._banner_images')
 
-        <div class="p-12 flex mx-auto flex-col gap-3 items-start justify-items-center">
+        <div class="px-4 lg:px-12 flex mx-auto flex-col space-y-6 items-start justify-items-center">
             <a href="{{route('information',['locale'=>'fr'])}}" class="flex flex-row items-center gap-4">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 40" width="60" height="40">
                     <rect width="20" height="40" fill="blue"/>
