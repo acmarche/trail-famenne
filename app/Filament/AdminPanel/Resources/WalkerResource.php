@@ -4,18 +4,15 @@ namespace App\Filament\AdminPanel\Resources;
 
 use App\Constant\TshirtEnum;
 use App\Filament\AdminPanel\Resources\WalkerResource\Pages;
-use App\Models\Registration;
 use App\Models\Role;
 use App\Models\Walker;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
+use App\Filament\FrontPanel\Resources\RegistrationResource as FrontRegistration;
 
 class WalkerResource extends Resource
 {
@@ -87,12 +84,22 @@ class WalkerResource extends Resource
                     ->badge()->size('xxl')
                     ->color(fn(TshirtEnum $state): string => $state->getColor())
                     ->icon(fn(TshirtEnum $state): string => $state->getIcon()),
-                Tables\Columns\TextColumn::make('registration.payement_date')
+                Tables\Columns\TextColumn::make('registration.id')
                     ->label('Date d\'inscription')
-                    ->state(function ( $state) {
-                        dd($state);
-                        return $state;
-                    }),
+                    ->formatStateUsing(fn ($record) => $record->registration->registrationDateFormated())
+                    ->url(
+                        fn($record)
+                            => FrontRegistration::getUrl(
+                            name: 'complete',
+                            parameters: ['record' => $record->registration_id],
+                            panel: 'front',
+                        ),
+                    )->openUrlInNewTab()
+                ,
+                /*->state(function ( $state) {
+                    dd($state);
+                    return $state;
+                }),*/
                 Tables\Columns\TextColumn::make('city')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('country')
