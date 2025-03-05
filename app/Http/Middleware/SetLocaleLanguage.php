@@ -48,10 +48,11 @@ class SetLocaleLanguage
 
         /**
          * With browser params
-         */
+         *
         if ($locale = request()->getPreferredLanguage()) {
             return $locale;
         }
+         */
 
         /**
          * Get the application's current locale
