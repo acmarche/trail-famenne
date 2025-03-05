@@ -16,6 +16,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\HtmlString;
 
 class WalkersRelationManager extends RelationManager
@@ -73,7 +74,8 @@ class WalkersRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
-                    ->createAnother(false),
+                    ->createAnother(false)
+                    ->label(__('invoices::messages.form.walker.actions.create.label')),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
