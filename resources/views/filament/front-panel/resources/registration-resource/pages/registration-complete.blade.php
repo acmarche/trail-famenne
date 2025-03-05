@@ -7,7 +7,7 @@
             <x-alert type="success">
                 {{__('invoices::messages.invoice.payment.finish.congratulate')}}
             </x-alert>
-            <x-alert type="warning">
+            <x-alert type="danger">
                 {{__('invoices::messages.form.registration.notification.finish.body')}}
             </x-alert>
         </div>
