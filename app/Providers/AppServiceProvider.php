@@ -50,7 +50,7 @@ class AppServiceProvider extends ServiceProvider
                 ->compact();
         });
         FilamentAsset::register([
-            Js::make('custom-js', __DIR__ . '/../../resources/js/trail.js'),
+            Js::make('trail-js', __DIR__ . '/../../resources/js/trail.js'),
         ]);
     }
 
