@@ -69,7 +69,7 @@ class Registration extends Model
 
     public function registrationDateFormated(): string
     {
-        return Carbon::parse($this->registration_date)->translatedFormat('d F Y');
+        return Carbon::parse($this->registration_date)->translatedFormat('d F Y H:s');
     }
 
     public function communication(): string
