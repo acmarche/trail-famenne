@@ -8,6 +8,8 @@ use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Support\Assets\Js;
+use Filament\Support\Facades\FilamentAsset;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -47,6 +49,9 @@ class AppServiceProvider extends ServiceProvider
                 ->columns()
                 ->compact();
         });
+        FilamentAsset::register([
+            Js::make('custom-js', __DIR__ . '/../../resources/js/trail.js'),
+        ]);
     }
 
     /**
