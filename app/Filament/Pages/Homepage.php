@@ -20,6 +20,7 @@ class Homepage extends Page
 
     public function getTitle(): string|Htmlable
     {
+        return ' ';
         return __('invoices::messages.page.welcome.title');
     }
 
@@ -52,12 +53,12 @@ class Homepage extends Page
 
     public function getLayout(): string
     {
-        return static::$layout ?? 'filament-panels::components.layout.simple';
+        return static::$layout ?? 'filament-panels::components.layout.base';
     }
 
     public function getMaxContentWidth(): MaxWidth
     {
-        return MaxWidth::Full;
+        return MaxWidth::Screen;
     }
 
 }
