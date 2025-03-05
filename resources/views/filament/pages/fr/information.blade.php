@@ -78,7 +78,7 @@
 
         <div class="my-6">
             <a href="https://marcheursdelafamenne.marche.be" target="_blank"
-               class="text-green-600 underline font-semibold">https://marcheursdelafamenne.marche.be</a>
+               class="text-green-600 underline font-semibold">Site web des Marcheurs de la Famenne</a>
         </div>
 
         @include('filament.pages.parts._logos')
