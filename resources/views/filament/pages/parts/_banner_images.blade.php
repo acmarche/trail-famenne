@@ -1,7 +1,7 @@
 <section class="py-4 lg:py-12 mx-auto flex gap-8">
     <img
         class="w-28 lg:w-64 rotate-3 rounded-xl opacity-80 transition duration-500 hover:rotate-0 hover:scale-110 hover:opacity-100"
-        src="{{asset('images/banner/481014440_2465405970471191_8765295421514980802_n.jpg')}}"
+        src="{{asset('images/banner/Amitie-marche.jpg')}}"
         alt=""/>
     <img
         class="w-28 lg:w-64 -rotate-3 rounded-xl opacity-80 transition duration-500 hover:rotate-0 hover:scale-110 hover:opacity-100"

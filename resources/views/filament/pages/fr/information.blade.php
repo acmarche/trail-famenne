@@ -1,9 +1,6 @@
 <x-filament-panels::page>
-    <div class="mx-5 bg-white shadow-lg rounded-lg p-4">
-        <div class="flex flex-row items-center justify-center">
-            <img src="{{asset('images/logoMarcheur.jpg')}}" alt="logo marcheur" class="w-56 ml-8">
-            <h1 class="text-3xl font-bold walker-primary text-center">Les Marcheurs de la Famenne</h1>
-        </div>
+    <div class=" bg-white shadow-lg rounded-lg p-4">
+        @include('filament.pages.parts._title')
 
         <div class="text-center">
             <h2 class="text-2xl walker-secondary text-center my-4">Vous invitent</h2>

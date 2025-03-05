@@ -74,6 +74,7 @@ class WalkerResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultPaginationPageOption(50)
             ->columns([
                 Tables\Columns\TextColumn::make('last_name')
                     ->searchable(),
@@ -89,7 +90,7 @@ class WalkerResource extends Resource
                 Tables\Columns\TextColumn::make('registration.payement_date')
                     ->label('Date d\'inscription')
                     ->state(function ( $state) {
-                       dd($state);
+                        dd($state);
                         return $state;
                     }),
                 Tables\Columns\TextColumn::make('city')
