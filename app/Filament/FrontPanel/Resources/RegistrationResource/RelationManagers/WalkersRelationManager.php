@@ -4,7 +4,9 @@ namespace App\Filament\FrontPanel\Resources\RegistrationResource\RelationManager
 
 use App\Constant\DisplayNameEnum;
 use App\Constant\TshirtEnum;
+use App\Models\Registration;
 use App\Models\Walker;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Placeholder;
@@ -16,8 +18,8 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\HtmlString;
+
 
 class WalkersRelationManager extends RelationManager
 {
@@ -25,23 +27,32 @@ class WalkersRelationManager extends RelationManager
 
     public function form(Form $form): Form
     {
+        /**
+         * @var Registration $registation
+         */
+        $registation = $this->getOwnerRecord();
+
         return $form
             ->columns(1)
-            ->live()
-            ->reactive()
             ->schema([
                 Wizard::make([
                     Wizard\Step::make('necessary_data')
                         ->label(__('messages.form.registration.walkers.step1.label'))
                         ->schema(
-                            self::fieldsPersonal(),
+                            self::fieldsPersonal($registation),
                         ),
                     Wizard\Step::make('contact')
                         ->label(__('messages.form.registration.walkers.step2.label'))
                         ->schema(
                             self::fieldsContact(),
                         ),
-                ]),
+                ])
+                    ->nextAction(
+                        fn(Action $action) => $action->label('Continue')->color('success'),
+                    )->previousAction(
+                        fn(Action $action) => $action->label('Go Back')->color('warning'),
+                    )
+                    ->submitAction(view('filament.front-panel.resources.bnt_add_walker')),
             ]);
     }
 
@@ -75,7 +86,11 @@ class WalkersRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\CreateAction::make()
                     ->createAnother(false)
-                    ->label(__('invoices::messages.form.walker.actions.create.label')),
+                    ->label(__('invoices::messages.form.walker.actions.create.label'))
+                    //->modalFooterActions([])
+                    ->modalSubmitAction(false),
+                //   ->modalSubmitActionLabel('Create Record')
+                //   ->modalCancelActionLabel('Abort')
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -94,7 +109,7 @@ class WalkersRelationManager extends RelationManager
         return __('messages.form.registration.walkers.label');
     }
 
-    public static function fieldsPersonal(): array
+    public static function fieldsPersonal(Registration $registration): array
     {
         return [
             TextInput::make('first_name')
@@ -111,7 +126,8 @@ class WalkersRelationManager extends RelationManager
                 ->suffixIcon('tabler-mail')
                 ->maxLength(150)
                 ->autocomplete('email')
-                ->required(),
+                ->required()
+                ->default(fn(): string => $registration->email),
             Select::make('tshirt_size')
                 ->label(__('messages.tshirt_size'))
                 ->helperText(__('messages.tshirt.cost'))
@@ -165,4 +181,6 @@ class WalkersRelationManager extends RelationManager
     {
         return __('messages.walker.navigation.title');
     }
+
+
 }
