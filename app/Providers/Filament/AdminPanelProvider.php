@@ -34,6 +34,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login(Login::class)
+            ->brandLogo('/images/logoMarcheur.jpg')
             ->colors([
                 'primary' => Color::Amber,
             ])
