@@ -6,6 +6,7 @@ use App\Filament\FrontPanel\Resources\RegistrationResource;
 use App\Invoice\Facades\QrCodeGenerator;
 use App\Invoice\Invoice;
 use App\Models\Registration;
+use App\Utils\FileUtils;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\Concerns\InteractsWithRecord;
 use Filament\Resources\Pages\Page;
@@ -32,23 +33,14 @@ class RegistrationComplete extends Page
          * @var Registration $this ->record
          */
         $this->record = $this->resolveRecord($record);
-        //todo extract
         $qrCodePath = QrCodeGenerator::make()
             ->id($this->record->id)
             ->qrCodePath();
-        if (!$qrCodePath) {
-            try {
-                QrCodeGenerator::generateAndSaveIt($this->record);
-            } catch (\Exception $e) {
-                dd($e->getMessage());
-            }
+        if ($qrCodePath) {
+            $this->qrCode = FileUtils::convertToBase64($qrCodePath);
         }
-        $qrCodePath = QrCodeGenerator::make()
-            ->id($this->record->id)
-            ->qrCodePath();
-        $this->qrCode = self::convertToBase64($qrCodePath);
         $fileScanning = public_path('images/qr-code-scanning2.jpg');
-        $this->qrCodeScanning = self::convertToBase64($fileScanning);
+        $this->qrCodeScanning = FileUtils::convertToBase64($fileScanning);
         $this->message = 'coucou';
     }
 
@@ -76,14 +68,5 @@ class RegistrationComplete extends Page
     public static function canAccess(array $parameters = []): bool
     {
         return true;
-    }
-
-    private static function convertToBase64(string $filePath): ?string
-    {
-        $imageData = base64_encode(file_get_contents($filePath));
-        $mimeType = mime_content_type($filePath);
-        $base64Image = "data:$mimeType;base64,$imageData";
-
-        return $base64Image;
     }
 }

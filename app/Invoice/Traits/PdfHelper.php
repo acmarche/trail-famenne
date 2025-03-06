@@ -5,6 +5,7 @@ namespace App\Invoice\Traits;
 use App\Invoice\Buyer;
 use App\Invoice\Invoice;
 use App\Models\Registration;
+use App\Utils\FileUtils;
 use Barryvdh\DomPDF\Facade\Pdf as PdfFacade;
 use Barryvdh\DomPDF\PDF;
 use Exception;
@@ -73,10 +74,10 @@ trait PdfHelper
             ->qrCodePath();
 
         $fileScanning = public_path('images/qr-code-scanning2.jpg');
-        $qrCodeScanning = self::convertToBase64($fileScanning);
+        $qrCodeScanning = FileUtils::convertToBase64($fileScanning);
 
         if ($qrCodeFile) {
-            $qrCodeFile = self::convertToBase64($qrCodeFile);
+            $qrCodeFile = FileUtils::convertToBase64($qrCodeFile);
         }
 
         $view = View::make(
@@ -89,7 +90,7 @@ trait PdfHelper
         return $view->render();
     }
 
-    public static function downloadPdfFromPath(string $filePath): BinaryFileResponse
+    public static function downloadPdfFromPath(?string $filePath): BinaryFileResponse
     {
         if (!file_exists($filePath)) {
             abort(404, 'File not found.');
@@ -159,14 +160,5 @@ trait PdfHelper
         } else {
             return null;
         }
-    }
-
-    public static function convertToBase64(string $filePath): ?string
-    {
-        $imageData = base64_encode(file_get_contents($filePath));
-        $mimeType = mime_content_type($filePath);
-        $base64Image = "data:$mimeType;base64,$imageData";
-
-        return $base64Image;
     }
 }
