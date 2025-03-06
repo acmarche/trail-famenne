@@ -5,7 +5,6 @@ namespace App\Filament\Pages;
 use Filament\Pages\Page;
 use Filament\Support\Enums\MaxWidth;
 use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Support\Facades\App;
 
 class Homepage extends Page
 {
@@ -16,16 +15,6 @@ class Homepage extends Page
     public function getTitle(): string|Htmlable
     {
         return ' ';
-    }
-
-    public function __construct()
-    {
-        $this->localeLanguage();
-    }
-
-    public function localeLanguage(): void
-    {
-        $this->locale = App::getLocale() ?? 'en';
     }
 
     public static function canAccess(): bool
