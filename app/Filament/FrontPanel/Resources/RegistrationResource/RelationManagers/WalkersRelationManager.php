@@ -20,7 +20,6 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\HtmlString;
 
-
 class WalkersRelationManager extends RelationManager
 {
     protected static string $relationship = 'walkers';
@@ -81,7 +80,7 @@ class WalkersRelationManager extends RelationManager
                     ->state(fn(Walker $walker) => $walker->amountInWords()),
             ])
             ->filters([
-                //
+
             ])
             ->headerActions([
                 Tables\Actions\CreateAction::make()
