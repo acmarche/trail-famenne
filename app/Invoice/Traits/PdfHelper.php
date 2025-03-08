@@ -98,6 +98,8 @@ trait PdfHelper
 
         //$fallback = $this->fallbackName($filePath);
 
+        //todo ?
+        //\response()->download($filePath);
         return FacadeResponse::download($filePath, 'downloaded-file.pdf', [
             'Content-Type' => 'application/pdf',
         ]);
