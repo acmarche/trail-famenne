@@ -29,7 +29,6 @@ class Walker extends Model
         'display_name',
         'gdpr_accepted',
         'registration_date',
-        'uuid',
     ];
 
     protected function casts(): array

@@ -11,7 +11,7 @@ class WalkersCountWidget extends BaseWidget
 {
     protected ?string $heading = 'Statistiques';
 
-    protected ?string $description = 'Quelques statistiques.';
+    protected ?string $description = 'Résumé des inscriptions';
 
     protected function getStats(): array
     {

@@ -1,6 +1,5 @@
 <?php
 
-use App\Constant\AppConstant;
 use App\Filament\FrontPanel\Resources\Pages\Information;
 use App\Filament\FrontPanel\Resources\Pages\Rgpd;
 use App\Filament\Pages\Homepage;
