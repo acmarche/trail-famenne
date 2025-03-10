@@ -21,7 +21,7 @@ class Tshirts extends Page implements HasForms, HasTable
     use InteractsWithForms;
 
     protected static ?string $title = 'T-shirts résumé';
-    protected static ?string $navigationGroup = 'Settings';
+    protected static ?string $navigationGroup = 'Administration';
     protected static ?string $navigationIcon = 'tabler-shirt-sport';
     protected static string $view = 'filament.pages.tshirts';
 
