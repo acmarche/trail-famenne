@@ -20,19 +20,11 @@ class EditRegistration extends EditRecord
 {
     protected static string $resource = RegistrationResource::class;
     protected ?bool $hasUnsavedDataChangesAlert = true;//todo
-    public $defaultAction = 'launchForm';
-
-    public function mount(int|string $record): void
-    {
-        parent::mount($record);
-
-        // Trigger the create action when the page is mounted
-        $this->dispatch('mountTableAction', action: 'create');
-    }
+   // public $defaultAction = 'launchForm';
 
     public function launchForm(): Actions\Action
     {
-        $this->dispatch('mountTableAction', action: 'create');
+       // $this->dispatch('mountTableAction', action: 'create');
 
         /**
          * @var Registration $registration

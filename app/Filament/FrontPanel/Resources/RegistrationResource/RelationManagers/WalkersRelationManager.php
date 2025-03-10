@@ -24,6 +24,13 @@ class WalkersRelationManager extends RelationManager
 {
     protected static string $relationship = 'walkers';
 
+    public function mount22(): void
+    {
+        parent::mount();
+        $this->dispatch('open-modal', id: 'create');
+        $this->mountTableAction('create');
+    }
+
     public function form(Form $form): Form
     {
         /**
