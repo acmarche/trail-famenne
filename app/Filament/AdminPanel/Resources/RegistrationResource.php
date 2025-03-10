@@ -2,6 +2,8 @@
 
 namespace App\Filament\AdminPanel\Resources;
 
+use App\Events\InvoiceProcessed;
+use App\Events\RegistrationProcessed;
 use App\Filament\Actions\InvoiceDownloadAction;
 use App\Filament\AdminPanel\Resources\RegistrationResource\Pages;
 use App\Models\Registration;
@@ -52,7 +54,7 @@ class RegistrationResource extends Resource
                     ->label('Nb marcheurs')
                     ->counts('walkers'),
                 Tables\Columns\IconColumn::make('completed')
-                    ->label('Inscription finalisée')
+                    ->label('Inscription en cours')
                     ->toggleable(isToggledHiddenByDefault: true)
                     ->boolean(),
                 Tables\Columns\IconColumn::make('newsletter_accepted')
@@ -75,6 +77,7 @@ class RegistrationResource extends Resource
                     ->action(function (Registration $record) {
                         $record->payment_date = new \DateTime();
                         $record->save();
+                        RegistrationProcessed::dispatch($record);
                     })
                     ->label(fn(Registration $record): string => $record->isPaid() ? 'Payé' : 'Payer')
                     ->tooltip(fn(Registration $record): string => $record->isPaid() ? '' : 'Payer')
@@ -97,7 +100,7 @@ class RegistrationResource extends Resource
                         fn(Registration $registration): string => $registration->isPaid() ? 'success' : 'warning',
                     )
                     ->modalHeading(__('Payer la facture'))
-                    ->modalDescription(__('Confirmer que la facture a été payée')),
+                    ->modalDescription(__('Confirmer que la facture a été payée.')),
                 Tables\Actions\ViewAction::make()->label('Visualiser'),
                 Tables\Actions\EditAction::make(),
                 InvoiceDownloadAction::make(),

@@ -7,9 +7,15 @@
             <x-alert type="success">
                 {{__('invoices::messages.invoice.payment.finish.congratulate')}}
             </x-alert>
-            <x-alert type="danger">
-                {{__('invoices::messages.form.registration.notification.finish.body')}}
-            </x-alert>
+            @if($record->isPaid())
+                <x-alert type="success">
+                    {{__('invoices::messages.email.invoice.paid.body')}}
+                </x-alert>
+            @else
+                <x-alert type="danger">
+                    {{__('invoices::messages.form.registration.notification.finish.body')}}
+                </x-alert>
+            @endif
         </div>
     </div>
 
@@ -19,11 +25,13 @@
 
     <x-list-walkers :walkers="$record->walkers" :amount="$record->totalAmountInWords()"/>
 
-    <h3 class="text-2xl font-semibold walker-secondary my-2">
-        {{__('invoices::messages.invoice.payment.title')}}
-    </h3>
+    @if(!$record->isPaid())
+        <h3 class="text-2xl font-semibold walker-secondary my-2">
+            {{__('invoices::messages.invoice.payment.title')}}
+        </h3>
 
-    <x-payment-information :amount="$record->totalAmountInWords()" :communication="$record->communication()"/>
+        <x-payment-information :amount="$record->totalAmountInWords()" :communication="$record->communication()"/>
 
-    @include('invoices::pdf.qrcode')
+        @include('invoices::pdf.qrcode')
+    @endif
 </x-filament-panels::page>

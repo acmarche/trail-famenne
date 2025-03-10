@@ -53,6 +53,7 @@ return [
     'invoice.payment.iban.label' => 'IBAN',
     'invoice.payment.communication.label' => 'Communication',
     'invoice.payment.total_amount.label' => 'Total to paid',
+    'invoice.payment.total.label' => 'Total',
     'invoice.payment.finish.congratulate' => 'Thank you for your subscription',
     'invoice.payment.title' => 'Payment information',
     'invoice.payment.easy' => 'Payer facilement !',
@@ -67,4 +68,7 @@ return [
     'invoice.city' => 'City',
     'invoice.serial' => 'Num',
     'invoice.date' => 'Date',
+    'email.invoice.paid.subject' => 'Registration 100 km - Invoice',
+    'email.invoice.paid.body' => 'Your invoice is paid',
+
 ];

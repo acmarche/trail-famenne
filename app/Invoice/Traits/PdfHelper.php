@@ -70,14 +70,17 @@ trait PdfHelper
     {
         $template = sprintf('invoices::pdf.%s', $this->template);
 
-        $qrCodeFile = $this
-            ->qrCodePath();
-
         $fileScanning = public_path('images/qr-code-scanning2.jpg');
         $qrCodeScanning = FileUtils::convertToBase64($fileScanning);
 
-        if ($qrCodeFile) {
-            $qrCodeFile = FileUtils::convertToBase64($qrCodeFile);
+        if ($this->registration->isPaid()) {
+            $qrCodeFile = null;
+        } else {
+            $qrCodeFile = $this
+                ->qrCodePath();
+            if ($qrCodeFile) {
+                $qrCodeFile = FileUtils::convertToBase64($qrCodeFile);
+            }
         }
 
         $view = View::make(

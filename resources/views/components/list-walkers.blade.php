@@ -27,7 +27,7 @@
     {{-- Summary --}}
     <tr>
         <td></td>
-        <td class="text-right pl-0">{{ __('invoices::messages.invoice.payment.total_amount.label') }}</td>
+        <td class="text-right pl-0">{{ __('invoices::messages.invoice.payment.total.label') }}</td>
         <td class="text-right pr-0 total-amount">
             {{ $amount }}
         </td>

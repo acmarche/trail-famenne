@@ -54,6 +54,7 @@ return [
     'invoice.payment.iban.label' => 'IBAN',
     'invoice.payment.communication.label' => 'Communication',
     'invoice.payment.total_amount.label' => 'Total à payer',
+    'invoice.payment.total.label' => 'Total',
     'invoice.payment.finish.congratulate' => 'Merci pour votre inscription',
     'invoice.payment.easy' => 'Payer facilement !',
     'invoice.payment.help' => 'Scannez ce code via l\'application bancaire de votre smartphone et payez facilement  en toute sécurité.',
@@ -67,4 +68,6 @@ return [
     'invoice.city' => 'Localité',
     'invoice.serial' => 'Num',
     'invoice.date' => 'Date',
+    'email.invoice.paid.subject' =>  'Inscription 100 km - Facture',
+    'email.invoice.paid.body' => 'Facture payée',
 ];
