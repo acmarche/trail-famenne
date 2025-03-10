@@ -4,9 +4,11 @@ namespace App\Filament\FrontPanel\Resources\RegistrationResource\Pages;
 
 use App\Events\RegistrationProcessed;
 use App\Filament\FrontPanel\Resources\RegistrationResource;
+use App\Filament\FrontPanel\Resources\RegistrationResource\RelationManagers\WalkersRelationManager;
 use App\Models\Registration;
+use App\Models\Walker;
 use Filament\Actions;
-use Filament\Actions\StaticAction;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
@@ -18,6 +20,47 @@ class EditRegistration extends EditRecord
 {
     protected static string $resource = RegistrationResource::class;
     protected ?bool $hasUnsavedDataChangesAlert = true;//todo
+    public $defaultAction = 'launchForm';
+
+    public function mount(int|string $record): void
+    {
+        parent::mount($record);
+
+        // Trigger the create action when the page is mounted
+        $this->dispatch('mountTableAction', action: 'create');
+    }
+
+    public function launchForm(): Actions\Action
+    {
+        $this->dispatch('mountTableAction', action: 'create');
+
+        /**
+         * @var Registration $registration
+         */
+        $registration = $this->getRecord();
+
+        return Actions\CreateAction::make('lauchForm')
+            ->model(Walker::class)
+            ->modalHeading(__('invoices::messages.form.walker.actions.create.label'))
+            ->visible(fn() => $registration->walkers->count() < 1)
+            ->action(function (array $data) use ($registration): void {
+                $data['registration_id'] = $registration->id;
+                Walker::create($data);
+                $this->dispatch('refreshTable');
+
+                return;
+                /*  $this->getSavedNotification()?->send();
+                  $this->sendSuccessNotification();
+                  $this->getSavedNotification();*/
+                //$livewire->mountedTableActionRecord($registration->getKey());
+            })
+            ->after(fn() => $this->dispatch('refreshTable'))
+            ->modalSubmitAction(false)
+            ->createAnother(false)
+            ->form(function (Form $form) use ($registration): Form {
+                return WalkersRelationManager::createForm($form, $registration);
+            });
+    }
 
     public static function canAccess(array $parameters = []): bool
     {
@@ -30,6 +73,7 @@ class EditRegistration extends EditRecord
                     ->body('You cannot edit it.')
                     ->send();
             }
+
             return !$record->isCompleted();
         }
 
@@ -59,13 +103,6 @@ class EditRegistration extends EditRecord
                         ->label(__('messages.form.registration.actions.gdpr_accepted.label')),
                 ])
                 ->label(__('messages.form.registration.actions.header.finish.label'))
-                /*  ->modalSubmitAction(function (StaticAction $action, Registration $record) {
-                      if ($record->walkers->count() === 0) {
-                          $action
-                              ->label('no walkers')
-                              ->disabled();
-                      }
-                  })*/
                 ->requiresConfirmation()
                 ->modalIcon('heroicon-o-check')
                 ->color('success')
@@ -73,11 +110,6 @@ class EditRegistration extends EditRecord
                 ->modalHeading(__('messages.form.registration.actions.modal.finish.title'))
                 ->modalDescription(__('messages.form.registration.actions.modal.finish.description'))
                 ->modalSubmitActionLabel(__('messages.form.registration.actions.modal.finish.label'))
-                ->mountUsing(function (StaticAction $action) {
-                    $action
-                        ->label('no walkers')
-                        ->disabled();
-                })
                 ->action(function (array $data, Registration $record): void {
                     if ($record->walkers->count() === 0) {
                         Notification::make()
@@ -89,12 +121,7 @@ class EditRegistration extends EditRecord
                         return;
                     }
 
-                    $record->gdpr_accepted = $data['gdpr_accepted'] ?? false;
-                    $record->newsletter_accepted = $data['newsletter_accepted'] ?? false;
-                    $record->setCompleted();
-                    $record->save();
-
-                    RegistrationProcessed::dispatch($record);
+                    $this->saveRegistration($data, $record);
 
                     Notification::make()
                         ->success()
@@ -114,6 +141,21 @@ class EditRegistration extends EditRecord
     {
         return $form
             ->schema([]);
+    }
+
+    /**
+     * @param array $data
+     * @param Registration $record
+     * @return void
+     */
+    private function saveRegistration(array $data, Registration $record): void
+    {
+        $record->gdpr_accepted = $data['gdpr_accepted'] ?? false;
+        $record->newsletter_accepted = $data['newsletter_accepted'] ?? false;
+        $record->setCompleted();
+        $record->save();
+
+        RegistrationProcessed::dispatch($record);
     }
 
     protected function hasUnsavedDataChangesAlert22(): bool

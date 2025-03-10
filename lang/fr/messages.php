@@ -8,6 +8,7 @@ return [
     'form.registration.actions.new.title' => 'Nouvelle inscription',
     'form.walker.actions.create.subheading' => 'Votre adresse mail est nécessaire à votre inscription',
     'form.walker.actions.create.label' => 'Ajouter un marcheur',
+    'form.actions.create.label' => 'Ajouter',
     'registration.btn.new.signup' => 'Je m\'inscris au 100km',
     'form.registration.actions.create.label' => 'Nouvelle inscription',
     'form.registration.actions.edit.title' => 'Inscription au 100km',

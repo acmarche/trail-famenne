@@ -27,32 +27,11 @@ class WalkersRelationManager extends RelationManager
     public function form(Form $form): Form
     {
         /**
-         * @var Registration $registation
+         * @var Registration $registration
          */
-        $registation = $this->getOwnerRecord();
+        $registration = $this->getOwnerRecord();
 
-        return $form
-            ->columns(1)
-            ->schema([
-                Wizard::make([
-                    Wizard\Step::make('necessary_data')
-                        ->label(__('messages.form.registration.walkers.step1.label'))
-                        ->schema(
-                            self::fieldsPersonal($registation),
-                        ),
-                    Wizard\Step::make('contact')
-                        ->label(__('messages.form.registration.walkers.step2.label'))
-                        ->schema(
-                            self::fieldsContact(),
-                        ),
-                ])
-                    ->nextAction(
-                        fn(Action $action) => $action->label('Continue')->color('success'),
-                    )->previousAction(
-                        fn(Action $action) => $action->label('Go Back')->color('warning'),
-                    )
-                    ->submitAction(view('filament.front-panel.resources.bnt_add_walker')),
-            ]);
+        return self::createForm($form, $registration);
     }
 
     public function table(Table $table): Table
@@ -86,10 +65,7 @@ class WalkersRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make()
                     ->createAnother(false)
                     ->label(__('invoices::messages.form.walker.actions.create.label'))
-                    //->modalFooterActions([])
                     ->modalSubmitAction(false),
-                //   ->modalSubmitActionLabel('Create Record')
-                //   ->modalCancelActionLabel('Abort')
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -106,6 +82,33 @@ class WalkersRelationManager extends RelationManager
     public static function getTitle(Model $ownerRecord, string $pageClass): string
     {
         return __('messages.form.registration.walkers.label');
+    }
+
+    public static function createForm(Form $form, Registration $registration): Form
+    {
+        return $form
+            ->live()
+            ->columns(1)
+            ->schema([
+                Wizard::make([
+                    Wizard\Step::make('necessary_data')
+                        ->label(__('messages.form.registration.walkers.step1.label'))
+                        ->schema(
+                            self::fieldsPersonal($registration),
+                        ),
+                    Wizard\Step::make('contact')
+                        ->label(__('messages.form.registration.walkers.step2.label'))
+                        ->schema(
+                            self::fieldsContact(),
+                        ),
+                ])
+                    ->nextAction(
+                        fn(Action $action) => $action->label('Continue')->color('success'),
+                    )->previousAction(
+                        fn(Action $action) => $action->label('Go Back')->color('warning'),
+                    )
+                    ->submitAction(view('filament.front-panel.resources.bnt_add_walker')),
+            ]);
     }
 
     public static function fieldsPersonal(Registration $registration): array
@@ -181,5 +184,9 @@ class WalkersRelationManager extends RelationManager
         return __('messages.walker.navigation.title');
     }
 
+    protected function getTableRecordRefreshEvents(): array
+    {
+        return ['refreshTable'];
+    }
 
 }

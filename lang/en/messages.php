@@ -8,6 +8,7 @@ return [
     'form.registration.actions.new.title' => 'New registration',
     'form.walker.actions.create.subheading' => 'Your email is necessary to create your registration',
     'form.walker.actions.create.label' => 'Add a walker',
+    'form.actions.create.label' => 'Add',
     'registration.btn.new.signup' => 'I\'m signing up for the 100km',
     'form.registration.actions.create.label' => 'New registration',
     'form.registration.actions.edit.title' => '100km registration',

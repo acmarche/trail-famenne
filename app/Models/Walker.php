@@ -16,6 +16,7 @@ class Walker extends Model
     use HasUuids;
 
     protected $fillable = [
+        'registration_id',
         'first_name',
         'last_name',
         'email',
