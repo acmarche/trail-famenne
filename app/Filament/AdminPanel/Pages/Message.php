@@ -41,13 +41,14 @@ class Message extends Page implements HasForms
                     Action::make('send')
                         ->label('Envoyer')
                         ->requiresConfirmation()
-                        ->action(function () {
-                            $this->sendMessage();
+                        ->action(function (array $data) {
+                            $this->sendMessage($data['subject'], $data['content']);
                             Notification::make()
                                 ->title('Message envoyé')
                                 ->success()
                                 ->send();
-                        }),
+                        })
+                        ->successRedirectUrl($this::getUrl()),
                 ]),
             ]);
     }
@@ -74,7 +75,7 @@ class Message extends Page implements HasForms
         foreach ($emails as $email) {
             try {
                 Mail::to(new Address('jf@marche.be', $email))
-                    ->send((new ContactMessage( $message))
+                    ->send((new ContactMessage($message))
                         ->subject($subject));
             } catch (\Exception $e) {
                 dd($e->getMessage());
