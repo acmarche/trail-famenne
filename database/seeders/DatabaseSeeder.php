@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Constant\TshirtEnum;
 use App\Models\Registration;
 use App\Models\Role;
 use App\Models\User;
@@ -53,9 +54,13 @@ class DatabaseSeeder extends Seeder
         ])->each(function (Registration $registration) {
             Walker::factory(rand(1, 5))->create([
                 'registration_id' => $registration->id,
+                'tshirt_size' => $this->randomShirt(),
             ]);
         });
     }
 
-
+    private function randomShirt(): TshirtEnum
+    {
+        return TshirtEnum::from(array_rand(array_flip(array_map(fn($case) => $case->value, TshirtEnum::cases()))));
+    }
 }
