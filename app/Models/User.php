@@ -24,6 +24,8 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasName
      */
     protected $fillable = [
         'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
         'plainPassword',
