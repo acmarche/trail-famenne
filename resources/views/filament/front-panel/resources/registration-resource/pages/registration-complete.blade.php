@@ -1,6 +1,6 @@
 <x-filament-panels::page>
 
-    <div class="flex flex-row gap-2 w-full items-center justify-items-center">
+    <div class="flex flex-col md:flex-row gap-2 w-full items-center justify-items-center">
         <img src="{{asset('images/manwithbeer.png')}}"
              width="250" alt="scan"/>
         <div class="flex-1 flex-col gap-3">
