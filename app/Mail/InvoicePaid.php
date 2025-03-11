@@ -32,7 +32,7 @@ class InvoicePaid extends Mailable
     {
         return new Envelope(
             from: new Address(config('mail.from.address'), config('APP_NAME')),
-            subject: __('messages.email.invoice.paid.subject'),
+            subject: __('invoices::messages.email.invoice.paid.subject'),
         );
     }
 
@@ -49,7 +49,7 @@ class InvoicePaid extends Mailable
         return new Content(
             markdown: 'mail.invoice-paid',
             with: [
-                'textbtn' => __('messages.email.registration.confirm.btn.label'),
+                'textbtn' => __('invoices::messages.email.registration.confirm.btn.label'),
                 'url' => RegistrationResource::getUrl('complete', ['record' => $this->registration], panel: 'front'),
                 'logo' => $this->logo,
             ],

@@ -8,11 +8,11 @@
 
     # {{ config('app.name') }}
 
-    ## Welcome {{$registration->firstWalker->first_name}} {{$registration->firstWalker->last_name}} :joy:
+    ## Thanks for your paid {{$registration->firstWalker->first_name}} {{$registration->firstWalker->last_name}} :joy:
 
     <x-mail::panel style="margin-top: 20px;margin-bottom: 20px;">
         <p style="color: #26e854;font-weight: bold;">
-            ## {{__('invoices::messages.email.invoice.paid.body')}}
+            ## {{__('invoices::messages.email.invoice.paid.body')}} :-)
         </p>
     </x-mail::panel>
 

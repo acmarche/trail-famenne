@@ -2,7 +2,7 @@
 
 namespace App\Filament\AdminPanel\Resources;
 
-use App\Events\InvoiceProcessed;
+use Filament\Notifications\Notification;
 use App\Events\RegistrationProcessed;
 use App\Filament\Actions\InvoiceDownloadAction;
 use App\Filament\AdminPanel\Resources\RegistrationResource\Pages;
@@ -77,6 +77,10 @@ class RegistrationResource extends Resource
                     ->action(function (Registration $record) {
                         $record->payment_date = new \DateTime();
                         $record->save();
+                        Notification::make()
+                            ->title('Facture payée')
+                            ->success()
+                            ->send();
                         RegistrationProcessed::dispatch($record);
                     })
                     ->label(fn(Registration $record): string => $record->isPaid() ? 'Payé' : 'Payer')
