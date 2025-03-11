@@ -70,4 +70,5 @@ return [
     'invoice.date' => 'Date',
     'email.invoice.paid.subject' =>  'Inscription 100 km - Facture',
     'email.invoice.paid.body' => 'Facture payée',
+    'NONE' => 'Non',
 ];

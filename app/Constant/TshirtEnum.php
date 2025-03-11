@@ -15,7 +15,7 @@ enum TshirtEnum: string
     public function label(): string
     {
         return match ($this) {
-            self::NO => self::NO->value,
+            self::NO => __(self::NO->value),
             self::XS => self::XS->value,
             self::S => self::S->value,
             self::M => self::M->value,
@@ -29,7 +29,6 @@ enum TshirtEnum: string
     {
         return match ($this) {
             self::NO => 'gray',
-            self::XS => 'gray',
             default => 'success',
         };
     }
