@@ -1,8 +1,8 @@
 <?php
 
-use App\Invoice\Seller;
 
 return [
+    'MAIL_IT_ADDRESS' => env('MAIL_IT_ADDRESS'),
     'seller' =>
         [
             'name' => env('APP_NAME'),
@@ -18,7 +18,6 @@ return [
              * Must implement LaravelDaily\Invoices\Contracts\PartyContract
              *      or extend LaravelDaily\Invoices\Classes\Party
              */
-            'class' => Seller::class,
         ],
 
     'date' => [
