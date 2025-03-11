@@ -2,6 +2,8 @@
 
 return [
     'page.welcome.title' => 'Homepage',
+    'page.information.title' => 'Information',
+    'page.rgpd.title' => 'General Data Protection Regulation',
     'registration.navigation.label' => 'New registration',
     'registration.navigation.plural.model.label' => 'Registrations',
     'navigation.admin.dashboard.label' => 'Gestion',

@@ -13,7 +13,6 @@ class Information extends Page
     //protected ?string $heading = 'Custom Page Heading';
     //protected ?string $subheading = 'Custom Page Subheading';
 
-    public array $log = ['reason' => 'super'];
     public string $locale = '';
 
     public function __construct()
@@ -49,7 +48,7 @@ class Information extends Page
 
     public function getTitle(): string|Htmlable
     {
-        return __('Information');
+        return __('invoices::messages.page.information.title');
     }
 
 }

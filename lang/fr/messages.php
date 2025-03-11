@@ -2,6 +2,8 @@
 
 return [
     'page.welcome.title' => 'Accueil',
+    'page.information.title' => 'Information',
+    'page.rgpd.title' => 'Règlement Général sur la Protection des Données',
     'registration.navigation.label' => 'Nouvelle inscription',
     'registration.navigation.plural.model.label' => 'Inscriptions',
     'navigation.admin.dashboard.label' => 'Gestion',
