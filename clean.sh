@@ -2,4 +2,3 @@
 php artisan filament:clear-cached-components
 php artisan cache:clear
 rm -fr storage/logs/*.log
-chown www-data:www-data bootstrap/cache/ -R storage -R
