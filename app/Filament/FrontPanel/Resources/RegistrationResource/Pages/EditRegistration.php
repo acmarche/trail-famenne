@@ -13,6 +13,7 @@ use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Form;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Support\Enums\MaxWidth;
 use Filament\Support\Facades\FilamentView;
 use Illuminate\Contracts\Support\Htmlable;
 
@@ -93,6 +94,9 @@ class EditRegistration extends EditRecord
                     Checkbox::make('gdpr_accepted')
                         ->required()
                         ->label(__('messages.form.registration.actions.gdpr_accepted.label')),
+                    Checkbox::make('regulation_accepted')
+                        ->required()
+                        ->label(__('messages.form.registration.actions.regulation_accepted.label')),
                 ])
                 ->label(__('messages.form.registration.actions.header.finish.label'))
                 ->requiresConfirmation()
@@ -102,6 +106,7 @@ class EditRegistration extends EditRecord
                 ->modalHeading(__('messages.form.registration.actions.modal.finish.title'))
                 ->modalDescription(__('messages.form.registration.actions.modal.finish.description'))
                 ->modalSubmitActionLabel(__('messages.form.registration.actions.modal.finish.label'))
+                ->modalWidth(MaxWidth::ExtraLarge)
                 ->action(function (array $data, Registration $record): void {
                     if ($record->walkers->count() === 0) {
                         Notification::make()

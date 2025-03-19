@@ -5,10 +5,11 @@ namespace App\Filament\FrontPanel\Resources\Pages;
 use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
 
-class Rgpd extends Page
+class RgpdPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     protected static string $view = 'filament.pages.rgpd';
+    protected static ?string $navigationGroup = 'Informations';
 
     public array $log=['reason'=>'super'];
 

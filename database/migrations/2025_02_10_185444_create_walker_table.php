@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->boolean('completed')->default(false);
             $table->boolean('gdpr_accepted')->default(false);
             $table->boolean('newsletter_accepted')->default(false);
+            $table->boolean('regulation_accepted')->default(false);
             $table->timestamp('registration_date')->useCurrent();
             $table->timestamp('payment_date')->default(null)->nullable();
             $table->timestamps();

@@ -2,7 +2,9 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\FrontPanel\Resources\Pages\Information;
+use App\Filament\FrontPanel\Resources\Pages\InformationPage;
+use App\Filament\FrontPanel\Resources\Pages\RgpdPage;
+use App\Filament\FrontPanel\Resources\Pages\WalkersPage;
 use App\Http\Middleware\SetLocaleLanguage;
 use App\Models\Role;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -61,7 +63,9 @@ class FrontPanelProvider extends PanelProvider
                 for: 'App\\Filament\\FrontPanel\\Pages',
             )
             ->pages([
-                Information::class,
+                InformationPage::class,
+                WalkersPage::class,
+                RgpdPage::class,
             ])
             ->discoverWidgets(
                 in: app_path('Filament/FrontPanel/Widgets'),

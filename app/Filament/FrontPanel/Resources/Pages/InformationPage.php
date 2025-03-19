@@ -7,12 +7,13 @@ use App\Http\Middleware\SetLocaleLanguage;
 use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
 
-class Information extends Page
+class InformationPage extends Page
 {
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
     //protected ?string $heading = 'Custom Page Heading';
     //protected ?string $subheading = 'Custom Page Subheading';
 
+    protected static ?string $navigationGroup = 'Informations';
     public string $locale = '';
 
     public function __construct()
