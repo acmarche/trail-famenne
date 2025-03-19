@@ -9,8 +9,7 @@ class Login extends BasePage
     public function mount(): void
     {
         parent::mount();
-
-        if (app()->isLocal()) {
+        if (!app()->environment('production')) {
             $this->form->fill([
                 'email' => 'jf@marche.be',
                 'password' => 'marge',

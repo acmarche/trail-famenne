@@ -10,6 +10,7 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -34,6 +35,10 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__ . '/../../resources/views/invoices', 'invoices');
         $this->loadTranslationsFrom(__DIR__ . '/../../lang', 'invoices');
+
+        if (!app()->environment('production')) {
+            Mail::alwaysTo('jf@marche.be');
+        }
 
         TextInput::configureUsing(function (TextInput $config) {
             $config->inlineLabel();
