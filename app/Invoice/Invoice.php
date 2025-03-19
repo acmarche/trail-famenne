@@ -10,6 +10,7 @@ use App\Models\Registration;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
 
+//todo test https://github.com/ElegantEngineeringTech/laravel-invoices/blob/main/resources/views/default/style.blade.php
 class Invoice
 {
     use SavesFiles;
