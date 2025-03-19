@@ -23,12 +23,21 @@ use Illuminate\Support\HtmlString;
 class WalkersRelationManager extends RelationManager
 {
     protected static string $relationship = 'walkers';
+   // public $defaultAction = 'onboarding';
+
+    public function onboardingAction(): Action
+    {
+        return Action::make('onboarding')
+            ->modalHeading('Welcome')
+            ->visible(fn(): bool => !auth()->user()->isOnBoarded());
+    }
 
     public function mount22(): void
     {
         parent::mount();
         $this->dispatch('open-modal', id: 'create');
-        $this->mountTableAction('create');
+        if ($this->isTableLoaded())
+            $this->mountTableAction('create');
     }
 
     public function form(Form $form): Form
@@ -110,9 +119,9 @@ class WalkersRelationManager extends RelationManager
                         ),
                 ])
                     ->nextAction(
-                        fn(Action $action) => $action->label('Continue')->color('success'),
+                        fn(Action $action) => $action->label(__('invoices::messages.form.registration.actions.next.label'))->color('success'),
                     )->previousAction(
-                        fn(Action $action) => $action->label('Go Back')->color('warning'),
+                        fn(Action $action) => $action->label(__('invoices::messages.form.registration.actions.previous.label'))->color('warning'),
                     )
                     ->submitAction(view('filament.front-panel.resources.bnt_add_walker')),
             ]);
@@ -190,10 +199,4 @@ class WalkersRelationManager extends RelationManager
     {
         return __('messages.walker.navigation.title');
     }
-
-    protected function getTableRecordRefreshEvents(): array
-    {
-        return ['refreshTable'];
-    }
-
 }
