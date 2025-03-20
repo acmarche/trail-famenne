@@ -3,16 +3,22 @@
 namespace App\Filament\AdminPanel\Resources;
 
 use App\Constant\TshirtEnum;
+use App\Events\RegistrationProcessed;
+use App\Filament\Actions\InvoiceDownloadAction;
 use App\Filament\AdminPanel\Resources\WalkerResource\Pages;
+use App\Form\WalkerForm;
 use App\Models\Role;
 use App\Models\Walker;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
-use App\Filament\FrontPanel\Resources\RegistrationResource as FrontRegistration;
+use App\Filament\FrontPanel\Resources\WalkerResource as FrontWalker;
 
 class WalkerResource extends Resource
 {
@@ -32,40 +38,7 @@ class WalkerResource extends Resource
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('last_name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('first_name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('street')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('city')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('country')
-                    ->maxLength(255)
-                    ->default('Belgium'),
-                Forms\Components\DatePicker::make('date_of_birth'),
-                Forms\Components\TextInput::make('club_name')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('phone')
-                    ->tel()
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('tshirt_size')
-                    ->required()
-                    ->maxLength(255)
-                    ->default(TshirtEnum::NO->value),
-            ]);
+        return WalkerForm::createForm($form);
     }
 
     public static function table(Table $table): Table
@@ -84,12 +57,23 @@ class WalkerResource extends Resource
                     ->badge()->size('xxl')
                     ->color(fn(TshirtEnum $state): string => $state->getColor())
                     ->icon(fn(TshirtEnum $state): string => $state->getIcon()),
+
+                Tables\Columns\IconColumn::make('newsletter_accepted')
+                    ->boolean(),
+                Tables\Columns\TextColumn::make('is_paid')
+                    ->label('Payé')
+                    ->state(fn(Walker $walker) => $walker->isPaid() ? 'Oui' : 'Non'),
+                Tables\Columns\TextColumn::make('registration_date')
+                    ->label('Date d\'inscription')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('registration.id')
                     ->label('Date d\'inscription')
                     ->formatStateUsing(fn ($record) => $record->registration->registrationDateFormated())
                     ->url(
                         fn($record)
-                            => FrontRegistration::getUrl(
+                            => FrontWalker::getUrl(
                             name: 'complete',
                             parameters: ['record' => $record->registration_id],
                             panel: 'front',
@@ -106,9 +90,45 @@ class WalkerResource extends Resource
                     ->searchable(),
             ])
             ->filters([
-                //
+                Filter::make('is_paid')
+                    ->query(fn(Builder $query) => $query->where('payment_date', 'IS NOT', null)),
             ])
             ->actions([
+                Tables\Actions\Action::make('payment')
+                    ->action(function (Walker $record) {
+                        $record->payment_date = new \DateTime();
+                        $record->save();
+                        Notification::make()
+                            ->title('Facture payée')
+                            ->success()
+                            ->send();
+                        RegistrationProcessed::dispatch($record);
+                    })
+                    ->label(fn(Walker $record): string => $record->isPaid() ? 'Payé' : 'Payer')
+                    ->tooltip(fn(Walker $record): string => $record->isPaid() ? '' : 'Payer')
+                    ->disabled(fn(Walker $record): bool => $record->isPaid())
+                    ->form(function (Form $form) {
+                        return $form->schema([
+                            Forms\Components\DatePicker::make('payment_date')
+                                ->label('Date de paiment')
+                                ->default(now())
+                                ->required(),
+                        ]);
+                    })
+                    ->requiresConfirmation()
+                    ->icon('tabler-tax-euro')
+                    ->modalIcon('tabler-pig-money')
+                    ->color(
+                        fn(Walker $walker): string => $walker->isPaid() ? 'success' : 'danger',
+                    )
+                    ->modalIconColor(
+                        fn(Walker $walker): string => $walker->isPaid() ? 'success' : 'warning',
+                    )
+                    ->modalHeading(__('Payer la facture'))
+                    ->modalDescription(__('Confirmer que la facture a été payée.')),
+                Tables\Actions\ViewAction::make()->label('Visualiser'),
+                Tables\Actions\EditAction::make(),
+                InvoiceDownloadAction::make(),
                 Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])

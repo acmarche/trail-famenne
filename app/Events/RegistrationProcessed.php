@@ -2,7 +2,8 @@
 
 namespace App\Events;
 
-use App\Models\Registration;
+
+use App\Models\Walker;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Events\ShouldDispatchAfterCommit;
@@ -16,11 +17,11 @@ class RegistrationProcessed implements ShouldDispatchAfterCommit
     /**
      * Create a new event instance.
      */
-    public function __construct(private readonly Registration $registration) {}
+    public function __construct(private readonly Walker $walker) {}
 
-    public function registration(): Registration
+    public function walker(): Walker
     {
-        return $this->registration;
+        return $this->walker;
     }
 
 

@@ -2,7 +2,7 @@
 
 namespace App\Filament\AdminPanel\Resources\WalkerResource\Widgets;
 
-use App\Models\Registration;
+
 use App\Models\Walker;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;

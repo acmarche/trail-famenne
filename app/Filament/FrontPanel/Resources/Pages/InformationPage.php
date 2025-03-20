@@ -2,7 +2,7 @@
 
 namespace App\Filament\FrontPanel\Resources\Pages;
 
-use App\Filament\FrontPanel\Resources\RegistrationResource;
+use App\Filament\FrontPanel\Resources\WalkerResource;
 use App\Http\Middleware\SetLocaleLanguage;
 use Filament\Pages\Page;
 use Illuminate\Contracts\Support\Htmlable;
@@ -33,7 +33,7 @@ class InformationPage extends Page
 
     public function getUrlCreate(): string
     {
-        return RegistrationResource::getUrl('create');
+        return WalkerResource::getUrl('create');
     }
 
     public function getView(): string

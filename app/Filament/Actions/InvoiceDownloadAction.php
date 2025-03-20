@@ -3,7 +3,8 @@
 namespace App\Filament\Actions;
 
 use App\Invoice\Invoice;
-use App\Models\Registration;
+
+use App\Models\Walker;
 use Filament\Notifications\Notification;
 use Filament\Tables\Actions\Action;
 
@@ -22,15 +23,15 @@ class InvoiceDownloadAction extends Action
             ->label('Facture')
             ->icon('tabler-file-type-pdf')
             ->color('info')
-            ->action(function (Registration $registration) {
+            ->action(function (Walker $walker) {
                 $invoicePath = Invoice::make()
-                    ->registration($registration)
+                    ->walker($walker)
                     ->invoicePath();
                 if (!$invoicePath) {
                     try {
-                        Invoice::generateWithQrCode($registration);
+                        Invoice::generateWithQrCode($walker);
                         $invoicePath = Invoice::make()
-                            ->registration($registration)
+                            ->walker($walker)
                             ->invoicePath();
                     } catch (\Exception $exception) {
                         Notification::make()

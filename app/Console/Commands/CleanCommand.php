@@ -2,7 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Registration;
+
+use App\Models\Walker;
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Command\Command as SfCommand;
 
@@ -20,16 +21,16 @@ class CleanCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Remove empty registrations';
+    protected $description = 'Remove empty walker';
 
     /**
      * Execute the console command.
      */
     public function handle(): int
     {
-        foreach (Registration::query()->whereDoesntHave('walkers')->get() as $registration) {
-            $this->info('Delete registration '.$registration->email);
-            $registration->delete();
+        foreach (Walker::query()->whereDoesntHave('walkers')->get() as $walker) {
+            $this->info('Delete walker '.$walker->email);
+            $walker->delete();
         }
 
         return SfCommand::SUCCESS;

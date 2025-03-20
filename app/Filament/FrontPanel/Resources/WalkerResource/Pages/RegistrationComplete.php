@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Filament\FrontPanel\Resources\RegistrationResource\Pages;
+namespace App\Filament\FrontPanel\Resources\WalkerResource\Pages;
 
-use App\Filament\FrontPanel\Resources\RegistrationResource;
+use App\Filament\FrontPanel\Resources\WalkerResource;
 use App\Invoice\Facades\QrCodeGenerator;
 use App\Invoice\Invoice;
-use App\Models\Registration;
+
+use App\Models\Walker;
 use App\Utils\FileUtils;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\Concerns\InteractsWithRecord;
@@ -17,7 +18,7 @@ class RegistrationComplete extends Page
     use InteractsWithRecord;
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
-    protected static string $resource = RegistrationResource::class;
+    protected static string $resource = WalkerResource::class;
     public ?string $qrCode;
     public ?string $qrCodeScanning;
     public string $message = '';
@@ -30,7 +31,7 @@ class RegistrationComplete extends Page
     public function mount(int|string $record): void
     {
         /**
-         * @var Registration $this ->record
+         * @var Walker $this->record
          */
         $this->record = $this->resolveRecord($record);
 
@@ -57,9 +58,9 @@ class RegistrationComplete extends Page
             Action::make('pdf')
                 ->label(__('invoices::messages.invoice.payment.pdf.link.label'))
                 ->icon('tabler-file-type-pdf')
-                ->action(function (Registration $record) {
+                ->action(function (Walker $record) {
                     $invoicePath = Invoice::make()
-                        ->registration($record)
+                        ->walker($record)
                         ->invoicePath();
 
                     return Invoice::downloadPdfFromPath($invoicePath);

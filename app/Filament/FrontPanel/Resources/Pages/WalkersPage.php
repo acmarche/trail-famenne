@@ -43,11 +43,7 @@ class WalkersPage extends Page implements HasForms, HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(
-                Walker::query()->whereHas('registration', function ($query) {
-                    $query->whereNotNull('payment_date');
-                })
-            )
+            ->query(Walker::query()->whereNotNull('payment_date'))
             ->columns([
                 TextColumn::make('first_name')
                     ->label(__('messages.first_name')),

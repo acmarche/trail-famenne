@@ -2,10 +2,11 @@
 
 namespace App\Mail;
 
-use App\Filament\FrontPanel\Resources\RegistrationResource;
+use App\Filament\FrontPanel\Resources\WalkerResource;
 use App\Invoice\Facades\Invoice;
 use App\Invoice\Facades\QrCodeGenerator;
-use App\Models\Registration;
+
+use App\Models\Walker;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
@@ -24,7 +25,7 @@ class RegistrationCompleted extends Mailable
     public ?string $logo = null;
     public ?string $qrcode = null;
 
-    public function __construct(public readonly Registration $registration) {}
+    public function __construct(public readonly Walker $walker) {}
 
     /**
      * Get the message envelope.
@@ -55,7 +56,7 @@ class RegistrationCompleted extends Mailable
             markdown: 'mail.registration-completed',
             with: [
                 'textbtn' => __('messages.email.registration.confirm.btn.label'),
-                'url' => RegistrationResource::getUrl('complete', ['record' => $this->registration]),
+                'url' => WalkerResource::getUrl('complete', ['record' => $this->registration]),
                 'logo' => $this->logo,
                 'qrCode' => $this->qrcode,
             ],

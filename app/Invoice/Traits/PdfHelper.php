@@ -4,7 +4,8 @@ namespace App\Invoice\Traits;
 
 use App\Invoice\Buyer;
 use App\Invoice\Invoice;
-use App\Models\Registration;
+
+use App\Models\Walker;
 use App\Utils\FileUtils;
 use Barryvdh\DomPDF\Facade\Pdf as PdfFacade;
 use Barryvdh\DomPDF\PDF;
@@ -31,11 +32,11 @@ trait PdfHelper
      * @throws BindingResolutionException
      * @throws Exception
      */
-    public static function generatePdfAndSaveIt(Registration $record): void
+    public static function generatePdfAndSaveIt(Walker $record): void
     {
         Invoice::make('Invoice-'.$record->id)
             ->registration($record)
-            ->buyer(Buyer::newFromRegistration($record))
+            ->buyer(Buyer::newFromWalker($record))
             ->logo(self::logoToBase64())
             ->render()
             ->saveInvoice();

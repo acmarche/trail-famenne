@@ -6,7 +6,8 @@ use App\Invoice\QrCode\QrCodeGenerator;
 use App\Invoice\Traits\InvoiceHelpers;
 use App\Invoice\Traits\PdfHelper;
 use App\Invoice\Traits\SavesFiles;
-use App\Models\Registration;
+
+use App\Models\Walker;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
 
@@ -25,7 +26,7 @@ class Invoice
 
     public Buyer $buyer;
 
-    public Registration $registration;
+    public Walker $walker;
 
     public array $paperOptions;
 
@@ -67,20 +68,20 @@ class Invoice
     }
 
     /**
-     * @param Registration $registration
+     * @param Walker $walker
      * @return void
      * @throws \Exception
      */
-    public static function generateWithQrCode(Registration $registration):void
+    public static function generateWithQrCode(Walker $walker):void
     {
         try {
-            QrCodeGenerator::generateAndSaveIt($registration);
+            QrCodeGenerator::generateAndSaveIt($walker);
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }
 
         try {
-            self::generatePdfAndSaveIt($registration);
+            self::generatePdfAndSaveIt($walker);
         } catch (\Exception $e) {
             throw new \Exception($e->getMessage());
         }

@@ -6,7 +6,7 @@ use App\Events\RegistrationProcessed;
 use App\Invoice\Invoice;
 use App\Mail\InvoicePaid;
 use App\Mail\RegistrationCompleted;
-use App\Models\Registration;
+use App\Models\Walker;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\Mime\Address;
@@ -20,36 +20,36 @@ class SendRegistrationNotification
      */
     public function handle(RegistrationProcessed $event): void
     {
-        $registration = $event->registration();
+        $walker = $event->walker();
 
         try {
-            Invoice::generateWithQrCode($registration);
+            Invoice::generateWithQrCode($walker);
         } catch (BindingResolutionException|\Exception $e) {
             dd($e->getMessage());
         }
 
-        if ($registration->isPaid()) {
-            $this->sendPaid($registration);
+        if ($walker->isPaid()) {
+            $this->sendPaid($walker);
         } else {
-            $this->sendNotPaid($registration);
+            $this->sendNotPaid($walker);
         }
     }
 
-    private function sendPaid(Registration $registration): void
+    private function sendPaid(Walker $walker): void
     {
         try {
-            Mail::to(new Address($registration->email, $registration->email))
-                ->send(new InvoicePaid($registration));
+            Mail::to(new Address($walker->email, $walker->email))
+                ->send(new InvoicePaid($walker));
         } catch (\Exception $e) {
             dd($e->getMessage());
         }
     }
 
-    private function sendNotPaid(Registration $registration): void
+    private function sendNotPaid(Walker $walker): void
     {
         try {
-            Mail::to(new Address($registration->email, $registration->email))
-                ->send(new RegistrationCompleted($registration));
+            Mail::to(new Address($walker->email, $walker->email))
+                ->send(new RegistrationCompleted($walker));
         } catch (\Exception $e) {
             dd($e->getMessage());
         }

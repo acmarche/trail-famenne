@@ -6,7 +6,7 @@ use App\Constant\TshirtEnum;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Number;
 use Illuminate\Support\Str;
 
@@ -39,9 +39,36 @@ class Walker extends Model
         ];
     }
 
-    public function registration(): BelongsTo
+    public function statusText(): string
     {
-        return $this->belongsTo(Registration::class);
+        return $this->isPaid() ? __('messages.invoice.paid') : __('messages.invoice.unpaid');
+    }
+
+    public function registrationDateFormated(): string
+    {
+        return Carbon::parse($this->registration_date)->translatedFormat('d F Y H:s');
+    }
+
+    public function communication(): string
+    {
+        return '100Km fact '.rand(1, 1000);//todo change it
+    }
+
+    public function runnersPaid(): array
+    {
+        return $this->all()
+            ->filter->isPaid()
+            //   ->filter->shipped()
+            ->map->items
+            ->collapse()
+            ->groupBy->product_id
+            ->map
+            ->sum('price')
+            ->filter(function ($total) {
+                return $total > 1000;
+            })
+            ->sortDesc()
+            ->take(10);
     }
 
     public function name(): string
@@ -60,12 +87,28 @@ class Walker extends Model
 
     public function isPaid(): bool
     {
-        return $this->registration()->payement_date !== null;
+        return $this->payement_date !== null;
     }
 
     public function amountInWords(): string
     {
         return Number::currency($this->amount(), in: 'EUR', locale: 'be');
     }
+
+    public static  function allcount(): int
+    {
+        return Registration::get()->count();
+    }
+
+    public static function registrationsNotPaidCount(): int
+    {
+       return Registration::whereNull('payment_date')->count();
+    }
+
+    public static function registrationsPaidCount(): int
+    {
+        return Registration::whereNotNull('payment_date')->count();
+    }
+
 
 }

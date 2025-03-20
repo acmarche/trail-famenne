@@ -3,7 +3,8 @@
 namespace App\Invoice\QrCode;
 
 use App\Invoice\Traits\SavesFiles;
-use App\Models\Registration;
+
+use App\Models\Walker;
 use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\Encoding\Encoding;
 use Endroid\QrCode\Writer\PngWriter;
@@ -33,12 +34,12 @@ class QrCodeGenerator
      * @throws BindingResolutionException
      * @throws \Exception
      */
-    public static function generateAndSaveIt(Registration $registration): void
+    public static function generateAndSaveIt(Walker $walker): void
     {
-        $qrCode = QrCodeGenerator::make('Invoice-'.$registration->id)
-            ->id($registration->id)
-            ->amount($registration->totalAmount())
-            ->communication($registration->communication());
+        $qrCode = QrCodeGenerator::make('Invoice-'.$walker->id)
+            ->id($walker->id)
+            ->amount($walker->totalAmount())
+            ->communication($walker->communication());
         $qrCode->generate();
     }
 

@@ -2,31 +2,25 @@
 
 namespace App\Filament\FrontPanel\Resources;
 
-use App\Filament\FrontPanel\Resources\RegistrationResource\Pages;
-use App\Filament\FrontPanel\Resources\RegistrationResource\RelationManagers\WalkersRelationManager;
-use App\Models\Registration;
-use Filament\Forms;
+use App\Filament\FrontPanel\Resources\WalkerResource\Pages;
+use App\Filament\FrontPanel\Resources\WalkerResource\RelationManagers\WalkersRelationManager;
+use App\Form\WalkerForm;
+use App\Models\Walker;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 
-class RegistrationResource extends Resource
+class WalkerResource extends Resource
 {
-    protected static ?string $model = Registration::class;
+    protected static ?string $model = Walker::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Inscription';
 
     public static function form(Form $form): Form
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
-            ]);
+        return WalkerForm::createForm($form);
     }
 
     public static function table(Table $table): Table
@@ -60,16 +54,15 @@ class RegistrationResource extends Resource
     public static function getRelations(): array
     {
         return [
-            WalkersRelationManager::class,
+       //     WalkersRelationManager::class,
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\CreateRegistration::route('/'),
-            'create' => Pages\CreateRegistration::route('/create'),
-            'edit' => Pages\EditRegistration::route('/{record}/edit'),
+            'index' => Pages\CreateWalker::route('/'),
+            'create' => Pages\CreateWalker::route('/create'),
             'complete' => Pages\RegistrationComplete::route('/{record}/complete'),
         ];
     }

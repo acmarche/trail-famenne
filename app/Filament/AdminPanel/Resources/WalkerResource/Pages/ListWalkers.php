@@ -19,14 +19,9 @@ class ListWalkers extends ListRecords
 
     public function __construct()
     {
-        $this->walkersAll = Walker::get()->count();
-
-        $this->walkersCountUnpaid = Walker::whereHas('registration', function ($query) {
-            $query->whereNull('payment_date');
-        })->count();
-        $this->walkersCountPaid = Walker::whereHas('registration', function ($query) {
-            $query->whereNotNull('payment_date');
-        })->count();
+        $this->walkersAll = Walker::allcount();
+        $this->walkersCountUnpaid = Walker::registrationsNotPaidCount();
+        $this->walkersCountPaid = Walker::registrationsPaidCount();
     }
 
     protected function getHeaderActions(): array
@@ -50,9 +45,7 @@ class ListWalkers extends ListRecords
                 })
                 ->label('Non payé')
                 ->modifyQueryUsing(function (Builder $query) {
-                    return $query->whereHas('registration', function ($query) {
-                        $query->whereNull('payment_date');
-                    });
+                    return $query->whereNull('payment_date');
                 }),
             'paid' => Tab::make('Paid')
                 ->label('Payé')
@@ -60,9 +53,7 @@ class ListWalkers extends ListRecords
                     return $this->walkersCountPaid;
                 })
                 ->modifyQueryUsing(function (Builder $query) {
-                    return $query->whereHas('registration', function ($query) {
-                        $query->whereNotNull('payment_date');
-                    });
+                    return $query->whereNotNull('payment_date');
                 }),
         ];
     }

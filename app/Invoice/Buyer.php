@@ -2,7 +2,7 @@
 
 namespace App\Invoice;
 
-use App\Models\Registration;
+use App\Models\Walker;
 
 class Buyer
 {
@@ -12,19 +12,14 @@ class Buyer
     public ?string $address = '';
     public ?string $phone = '';
 
-    public static function newFromRegistration(Registration $registration): self
+    public static function newFromWalker(Walker $walker): self
     {
-        $firstWalker = $registration->walkers()->first();
         $buyer = new self();
-        $buyer->name = $registration->email;
-        $buyer->email = $registration->email;
-
-        if ($firstWalker) {
-            $buyer->name = $firstWalker->first_name.' '.$firstWalker->last_name;
-            $buyer->address = $firstWalker->street;
-            $buyer->city = $firstWalker->city;
-            $buyer->phone = $firstWalker->phone;
-        }
+        $buyer->email = $walker->email;
+        $buyer->name = $walker->first_name.' '.$walker->last_name;
+        $buyer->address = $walker->street;
+        $buyer->city = $walker->city;
+        $buyer->phone = $walker->phone;
 
         return $buyer;
     }

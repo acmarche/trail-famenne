@@ -3,7 +3,8 @@
 namespace App\Invoice\Traits;
 
 use App\Invoice\Buyer;
-use App\Models\Registration;
+
+use App\Models\Walker;
 use Exception;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -11,10 +12,10 @@ trait InvoiceHelpers
 {
     public string $id;
 
-    public function registration(Registration $registration): static
+    public function walker(Walker $walker): static
     {
-        $this->registration = $registration;
-        $this->id = $this->registration->id;
+        $this->walker = $walker;
+        $this->id = $this->walker->id;
 
         return $this;
     }
@@ -74,8 +75,8 @@ trait InvoiceHelpers
      */
     public function validate(): void
     {
-        if (!$this->registration) {
-            throw new Exception('Registration not defined.');
+        if (!$this->walker) {
+            throw new Exception('Walker not defined.');
         }
     }
 
