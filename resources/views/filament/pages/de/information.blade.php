@@ -21,7 +21,7 @@
             <thead>
             <tr class="bg-green-600 text-white">
                 <th class="p-2">Entfernung</th>
-                <th class="p-2">Zeitplan</th>
+                <th class="p-2">Abfahrtszeit</th>
             </tr>
             </thead>
             <tbody>
@@ -54,8 +54,10 @@
         </p>
 
         <h3 class="text-2xl font-semibold walker-secondary mt-6">ANMELDUNG</h3>
-        <p>Anmeldung vor dem 1. August 2025 : <span class="font-semibold">45 €</span></p>
-        <p>Anmeldung nach dem 1. August 2025 : <span class="font-semibold">50 €</span> / Ohne T-shirt</p>
+        <p>Wenn Sie <span class="font-semibold">vor</span> dem 1. August bezahlen 2025 : <span class="font-semibold">45 € mit T-shirt</span>
+        </p>
+        <p>Wenn Sie <span class="font-semibold">nach</span> vor dem 1. August 2025 : <span class="font-semibold">50 € ohne T-shirt</span>
+        </p>
         <p class="mt-2">Dieser Preis beinhaltet: T-Shirt, Frühstück auf halber Strecke und Verpflegung.</p>
 
         <h3 class="text-2xl font-semibold walker-secondary mt-6">WICHTIG</h3>

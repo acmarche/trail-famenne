@@ -18,7 +18,7 @@
             <thead>
             <tr class="bg-green-600 text-white">
                 <th class="p-2">Afstand</th>
-                <th class="p-2">Per uur</th>
+                <th class="p-2">Vertrektijd</th>
             </tr>
             </thead>
             <tbody>
@@ -51,8 +51,8 @@
         </p>
 
         <h3 class="text-2xl font-semibold walker-secondary mt-6">INSCHRIJVING</h3>
-        <p>Inschrijving voor 1 augustus 2025 : <span class="font-semibold">45 €</span></p>
-        <p>Inschrijving na 1 augustus 2025 : <span class="font-semibold">50 €</span> / Zonder T-shirt</p>
+        <p>Als u <span class="font-semibold">vóór</span> 1 augustus betaalt : <span class="font-semibold">45 € met t-shirt</span></p>
+        <p>Als u <span class="font-semibold">na</span> 1 augustus betaalt : <span class="font-semibold">50 € zonder t-shirt</span></p>
         <p class="mt-2">In de prijs inbegrepen : t-shirt, ontbijt halverwege en bevoorrading.</p>
 
         <h3 class="text-2xl font-semibold walker-secondary mt-6">BELANGRIJK</h3>

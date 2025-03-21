@@ -1,5 +1,5 @@
 <x-filament::button
     type="submit"
     icon="tabler-plus">
-    {{__('invoices::messages.form.actions.create.label')}}
+    {{__('form.registration.actions.create.label')}}
 </x-filament::button>

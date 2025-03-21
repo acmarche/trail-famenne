@@ -21,7 +21,7 @@
             <thead>
             <tr class="bg-green-600 text-white">
                 <th class="p-2">Distance</th>
-                <th class="p-2">Duration</th>
+                <th class="p-2">Departure time</th>
             </tr>
             </thead>
             <tbody>
@@ -54,8 +54,10 @@
         </p>
 
         <h3 class="text-2xl font-semibold walker-secondary mt-6">REGISTRATION</h3>
-        <p>Before August 1, 2025 : <span class="font-semibold">45 €</span></p>
-        <p>After August 1, 2025 : <span class="font-semibold">50 €</span> / Without T-shirt</p>
+        <p>If you pay <span class="font-semibold">before</span> August 1st : <span class="font-semibold">45 € with T-shirt</span>
+        </p>
+        <p>If you pay <span class="font-semibold">after</span> August 1st : <span class="font-semibold">50 € without T-shirt</span>
+        </p>
         <p class="mt-2">This price includes: t-shirt, mid-course breakfast and refreshments.</p>
 
         <h3 class="text-2xl font-semibold walker-secondary mt-6">IMPORTANT</h3>
