@@ -62,6 +62,8 @@ class WalkerForm
                     [
                         'sm' => 1,
                         'md' => 2,
+                        'lg' => 2,
+                        'xl' => 2,
                     ]
                 )
                 ->schema([
@@ -108,6 +110,8 @@ class WalkerForm
                     [
                         'sm' => 1,
                         'md' => 2,
+                        'lg' => 2,
+                        'xl' => 2,
                     ])
                 ->schema([
                     TextInput::make('city')
