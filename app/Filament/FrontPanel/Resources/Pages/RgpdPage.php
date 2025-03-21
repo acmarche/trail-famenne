@@ -27,4 +27,9 @@ class RgpdPage extends Page
     {
         return __('invoices::messages.page.rgpd.title');
     }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('invoices::messages.page.rgpd.label');
+    }
 }

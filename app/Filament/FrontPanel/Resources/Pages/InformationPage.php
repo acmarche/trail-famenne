@@ -9,7 +9,7 @@ use Illuminate\Contracts\Support\Htmlable;
 
 class InformationPage extends Page
 {
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'tabler-info-circle';
     //protected ?string $heading = 'Custom Page Heading';
     //protected ?string $subheading = 'Custom Page Subheading';
 
@@ -52,4 +52,8 @@ class InformationPage extends Page
         return __('invoices::messages.page.information.title');
     }
 
+    public static function getNavigationLabel(): string
+    {
+        return __('invoices::messages.page.information.title');
+    }
 }

@@ -5,6 +5,7 @@ return [
     'page.information.title' => 'Informations',
     'page.walkers.title' => 'Participants',
     'page.rgpd.title' => 'Règlement Général sur la Protection des Données',
+    'page.rgpd.label' => 'Rgpd',
     'registration.navigation.label' => 'Nouvelle inscription',
     'registration.navigation.plural.model.label' => 'Inscriptions',
     'navigation.admin.dashboard.label' => 'Gestion',

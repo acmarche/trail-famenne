@@ -16,7 +16,7 @@ class WalkersPage extends Page implements HasTable
     use InteractsWithTable;
 
     protected static ?string $navigationGroup = 'Informations';
-    protected static ?string $navigationIcon = 'heroicon-o-document-text';
+    protected static ?string $navigationIcon = 'tabler-walk';
     //protected ?string $heading = 'Custom Page Heading';
     //protected ?string $subheading = 'Custom Page Subheading';
 
