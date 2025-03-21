@@ -3,7 +3,6 @@
 namespace App\Filament\FrontPanel\Resources;
 
 use App\Filament\FrontPanel\Resources\WalkerResource\Pages;
-use App\Filament\FrontPanel\Resources\WalkerResource\RelationManagers\WalkersRelationManager;
 use App\Form\WalkerForm;
 use App\Models\Walker;
 use Filament\Forms\Form;
@@ -26,14 +25,7 @@ class WalkerResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('registration_date')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
+            ->columns([ ])
             ->filters([
                 //
             ])
@@ -54,7 +46,7 @@ class WalkerResource extends Resource
     public static function getRelations(): array
     {
         return [
-       //     WalkersRelationManager::class,
+
         ];
     }
 

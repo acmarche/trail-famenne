@@ -7,6 +7,7 @@ use App\Filament\FrontPanel\Resources\Pages\InformationPage;
 use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -56,55 +57,73 @@ class WalkerForm
     private static function fieldsPersonal(): array
     {
         return [
-            TextInput::make('first_name')
-                ->label(__('invoices::messages.first_name'))
-                ->required()
-                ->maxLength(150),
-            TextInput::make('last_name')
-                ->label(__('invoices::messages.last_name'))
-                ->required()
-                ->maxLength(150),
-            TextInput::make('email')
-                ->label(__('invoices::messages.email'))
-                ->email()
-                ->suffixIcon('tabler-mail')
-                ->maxLength(150)
-                ->autocomplete('email')
-                ->required(),
-            TextInput::make('phone')
-                ->label(__('invoices::messages.phone'))
-                ->required()
-                ->tel(),
-            DatePicker::make('date_of_birth')
-                ->label(__('invoices::messages.date_of_birth.label'))
-                ->helperText(__('invoices::messages.date_of_birth.help'))
-                ->required()
-                ->maxDate(now())
-                ->date(),
-            Select::make('tshirt_size')
-                ->label(__('invoices::messages.tshirt_size'))
-                ->helperText(__('invoices::messages.tshirt.help'))
-                ->default(TshirtEnum::NO->value)
-                ->options(TshirtEnum::class)
-                ->suffixIcon('tabler-shirt-sport'),
+            Grid::make('personal')
+                ->columns(
+                    [
+                        'sm' => 1,
+                        'md' => 2,
+                    ]
+                )
+                ->schema([
+                    TextInput::make('last_name')
+                        ->label(__('invoices::messages.last_name'))
+                        ->required()
+                        ->maxLength(150),
+                    TextInput::make('first_name')
+                        ->label(__('invoices::messages.first_name'))
+                        ->required()
+                        ->maxLength(150),
+                    TextInput::make('email')
+                        ->label(__('invoices::messages.email'))
+                        ->email()
+                        ->suffixIcon('tabler-mail')
+                        ->maxLength(150)
+                        ->autocomplete('email')
+                        ->required(),
+                    TextInput::make('phone')
+                        ->label(__('invoices::messages.phone'))
+                        ->required()
+                        ->tel(),
+                    DatePicker::make('date_of_birth')
+                        ->label(__('invoices::messages.date_of_birth.label'))
+                        ->helperText(__('invoices::messages.date_of_birth.help'))
+                        ->required()
+                        ->maxDate(now())
+                        ->date(),
+                    Select::make('tshirt_size')
+                        ->label(__('invoices::messages.tshirt_size'))
+                        ->helperText(__('invoices::messages.tshirt.help'))
+                        ->default(TshirtEnum::NO->value)
+                        ->options(TshirtEnum::class)
+                        ->suffixIcon('tabler-shirt-sport'),
+                ]),
         ];
     }
 
     private static function fieldsContact(): array
     {
         return [
-            TextInput::make('city')
-                ->label(__('invoices::messages.city'))
-                ->maxLength(150),
-            TextInput::make('country')
-                ->label(__('invoices::messages.country'))
-                ->maxLength(150),
+            Grid::make('contact')
+                ->columns(
+                    [
+                        'sm' => 1,
+                        'md' => 2,
+                    ])
+                ->schema([
+                    TextInput::make('city')
+                        ->label(__('invoices::messages.city'))
+                        ->maxLength(150),
+                    TextInput::make('country')
+                        ->label(__('invoices::messages.country'))
+                        ->maxLength(150),
+                ]),
         ];
     }
 
     private static function fieldsGdpr(): array
     {
         $url = InformationPage::getUrl();
+        $labelRegulation = __('invoices::messages.regulation.label');
 
         return [
             Checkbox::make('newsletter_accepted')
@@ -118,7 +137,7 @@ class WalkerForm
                 ->label(__('messages.form.registration.actions.regulation_accepted.label')),
             Placeholder::make('documentation')
                 ->label(__('invoices::messages.documentation'))
-                ->content(new HtmlString('<a href="'.$url.'">Reglement</a>')),
+                ->content(new HtmlString('<a href="'.$url.'" target="_blank">'.$labelRegulation.'</a>')),
             Checkbox::make('display_name')
                 ->label(__('invoices::messages.display_name')),
         ];

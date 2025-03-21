@@ -22,15 +22,15 @@ class CreateWalker extends CreateRecord
         RegistrationProcessed::dispatch($record);
         Notification::make()
             ->success()
-            ->title(__('messages.form.registration.notification.finish.title'))
-            ->body(__('messages.form.registration.notification.finish.body'))
+            ->title(__('invoices::messages.form.registration.notification.finish.title'))
+            ->body(__('invoices::messages.form.registration.notification.finish.body'))
             ->send();
 
     }
 
     public function getTitle(): string|Htmlable
     {
-        return __('messages.form.registration.actions.new.title');
+        return __('invoices::messages.form.registration.actions.new.title');
     }
 
     protected function getRedirectUrl(): string
@@ -45,19 +45,17 @@ class CreateWalker extends CreateRecord
     }
 
     /**
-     * For label
+     * Remove btn confirm
+     * @return array|Action[]|\Filament\Actions\ActionGroup[]
      */
-    protected function getCreateFormAction(): Action
+    public function getFormActions(): array
     {
-        return Action::make('create')
-            ->label(__('messages.form.registration.actions.create.label'))
-            ->submit('create')
-            ->keyBindings(['mod+s']);
+        return [];
     }
 
     public function getSubheading(): string
     {
-        return __('messages.form.walker.actions.create.subheading');
+        return __('invoices::messages.form.walker.actions.create.subheading');
     }
 
 }
