@@ -4,8 +4,6 @@ namespace App\Filament\FrontPanel\Resources\Pages;
 
 use App\Http\Middleware\SetLocaleLanguage;
 use App\Models\Walker;
-use Filament\Forms\Concerns\InteractsWithForms;
-use Filament\Forms\Contracts\HasForms;
 use Filament\Pages\Page;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
@@ -13,10 +11,9 @@ use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
 use Illuminate\Contracts\Support\Htmlable;
 
-class WalkersPage extends Page implements HasForms, HasTable
+class WalkersPage extends Page implements HasTable
 {
     use InteractsWithTable;
-    use InteractsWithForms;
 
     protected static ?string $navigationGroup = 'Informations';
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
