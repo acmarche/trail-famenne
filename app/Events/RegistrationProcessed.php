@@ -2,7 +2,6 @@
 
 namespace App\Events;
 
-
 use App\Models\Walker;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -17,7 +16,9 @@ class RegistrationProcessed implements ShouldDispatchAfterCommit
     /**
      * Create a new event instance.
      */
-    public function __construct(private readonly Walker $walker) {}
+    public function __construct(private readonly Walker $walker)
+    {
+    }
 
     public function walker(): Walker
     {

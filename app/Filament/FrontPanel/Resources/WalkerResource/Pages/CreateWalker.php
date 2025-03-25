@@ -15,17 +15,16 @@ class CreateWalker extends CreateRecord
     protected static bool $canCreateAnother = false;
 
     /**
-     * todo
+     * todo use hookcallHook('afterCreate')
      */
-    private function todo()
+    protected function afterCreate(): void
     {
-        RegistrationProcessed::dispatch($record);
+        RegistrationProcessed::dispatch($this->record);
         Notification::make()
             ->success()
             ->title(__('invoices::messages.form.registration.notification.finish.title'))
             ->body(__('invoices::messages.form.registration.notification.finish.body'))
             ->send();
-
     }
 
     public function getTitle(): string|Htmlable

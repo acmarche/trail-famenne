@@ -18,7 +18,6 @@ use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
-use App\Filament\FrontPanel\Resources\WalkerResource as FrontWalker;
 
 class WalkerResource extends Resource
 {
@@ -45,10 +44,14 @@ class WalkerResource extends Resource
     {
         return $table
             ->defaultPaginationPageOption(50)
+            ->defaultSort('last_name')
             ->columns([
                 Tables\Columns\TextColumn::make('last_name')
-                    ->searchable(),
+                    ->label('Nom')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('first_name')
+                    ->label('Prénom')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
@@ -57,9 +60,6 @@ class WalkerResource extends Resource
                     ->badge()->size('xxl')
                     ->color(fn(TshirtEnum $state): string => $state->getColor())
                     ->icon(fn(TshirtEnum $state): string => $state->getIcon()),
-
-                Tables\Columns\IconColumn::make('newsletter_accepted')
-                    ->boolean(),
                 Tables\Columns\TextColumn::make('is_paid')
                     ->label('Payé')
                     ->state(fn(Walker $walker) => $walker->isPaid() ? 'Oui' : 'Non'),
@@ -68,25 +68,7 @@ class WalkerResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('registration.id')
-                    ->label('Date d\'inscription')
-                    ->formatStateUsing(fn ($record) => $record->registration->registrationDateFormated())
-                    ->url(
-                        fn($record)
-                            => FrontWalker::getUrl(
-                            name: 'complete',
-                            parameters: ['record' => $record->registration_id],
-                            panel: 'front',
-                        ),
-                    )->openUrlInNewTab()
-                ,
-                /*->state(function ( $state) {
-                    dd($state);
-                    return $state;
-                }),*/
                 Tables\Columns\TextColumn::make('city')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('country')
                     ->searchable(),
             ])
             ->filters([
@@ -126,11 +108,10 @@ class WalkerResource extends Resource
                     )
                     ->modalHeading(__('Payer la facture'))
                     ->modalDescription(__('Confirmer que la facture a été payée.')),
-                Tables\Actions\ViewAction::make()->label('Visualiser'),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\ViewAction::make()
+                    ->label('Visualiser')
+                    ->icon('tabler-eye'),
                 InvoiceDownloadAction::make(),
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

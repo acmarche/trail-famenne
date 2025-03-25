@@ -2,7 +2,11 @@
 
 namespace App\Constant;
 
-enum TshirtEnum: string
+use Filament\Support\Contracts\HasColor;
+use Filament\Support\Contracts\HasIcon;
+use Filament\Support\Contracts\HasLabel;
+
+enum TshirtEnum: string implements HasLabel, HasColor, HasIcon
 {
     case NO = 'NONE';
     case XS = 'XS';
@@ -12,7 +16,7 @@ enum TshirtEnum: string
     case XL = 'XL';
     case XXL = 'XXL';
 
-    public function label(): string
+    public function getLabel(): ?string
     {
         return match ($this) {
             self::NO => __(self::NO->value),
@@ -48,5 +52,4 @@ enum TshirtEnum: string
             default => 'tabler-shirt',
         };
     }
-
 }

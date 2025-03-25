@@ -126,7 +126,7 @@ class WalkerForm
 
     private static function fieldsGdpr(): array
     {
-        $url = InformationPage::getUrl();
+        $url = InformationPage::getUrl(panel:'front');
         $labelRegulation = __('invoices::messages.regulation.label');
 
         return [

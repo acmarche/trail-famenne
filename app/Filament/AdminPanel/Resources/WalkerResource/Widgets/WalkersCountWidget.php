@@ -15,32 +15,18 @@ class WalkersCountWidget extends BaseWidget
 
     protected function getStats(): array
     {
-        $walkersCountUnpaid = Walker::whereHas('registration', function ($query) {
-            $query->whereNull('payment_date');
-        })->count();
-        $walkersCountPaid = Walker::whereHas('registration', function ($query) {
-            $query->whereNotNull('payment_date');
-        })->count();
+        $walkersCountUnpaid = Walker::registrationsNotPaidCount();
+        $walkersCountPaid = Walker::registrationsPaidCount();
 
         return [
             Stat::make('Marcheurs validés', $walkersCountPaid)
-                ->description('Nombre de marcheurs payés')
+                ->description('Nombre de marcheurs ayant payé')
                 ->icon('tabler-walk')
-                ->color('success')                ,
-
-            Stat::make('Marcheurs non validés', $walkersCountUnpaid)
-                ->description('Nombre de marcheurs non payés')
-                ->icon('tabler-walk')
-                ->color('danger'),
-
-            Stat::make('Inscriptions payées', Registration::whereNotNull('payment_date')->count())
-                ->description('Date de paiement validée')
-                ->icon('tabler-currency-euro')
                 ->color('success'),
 
-            Stat::make('Inscriptions non payées', Registration::whereNull('payment_date')->count())
-                ->description('Pas de date de paiement')
-                ->icon('tabler-currency-euro-off')
+            Stat::make('Marcheurs non validés', $walkersCountUnpaid)
+                ->description('Nombre de marcheurs n\'ayant pas payés')
+                ->icon('tabler-walk')
                 ->color('danger'),
         ];
     }

@@ -97,17 +97,17 @@ class Walker extends Model
 
     public static  function allcount(): int
     {
-        return Registration::get()->count();
+        return self::get()->count();
     }
 
     public static function registrationsNotPaidCount(): int
     {
-       return Registration::whereNull('payment_date')->count();
+       return self::whereNull('payment_date')->count();
     }
 
     public static function registrationsPaidCount(): int
     {
-        return Registration::whereNotNull('payment_date')->count();
+        return self::whereNotNull('payment_date')->count();
     }
 
 
