@@ -49,14 +49,14 @@ class RegistrationCompleted extends Mailable
         }
 
         $this->qrcode = QrCodeGenerator::make()
-            ->id($this->registration->id)
+            ->id($this->walker->id)
             ->qrCodePath();
 
         return new Content(
             markdown: 'mail.registration-completed',
             with: [
                 'textbtn' => __('messages.email.registration.confirm.btn.label'),
-                'url' => WalkerResource::getUrl('complete', ['record' => $this->registration]),
+                'url' => WalkerResource::getUrl('complete', ['record' => $this->walker]),
                 'logo' => $this->logo,
                 'qrCode' => $this->qrcode,
             ],

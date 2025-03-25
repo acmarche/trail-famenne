@@ -171,7 +171,7 @@
     </tbody>
 </table>
 
-<x-list-walkers :walkers="$invoice->registration->walkers" :amount="$invoice->registration->totalAmountInWords()"/>
+<x-list-walkers :walker="$invoice->walker" :amount="$invoice->walker->amountInWords()"/>
 
 @if($invoice->notes)
     <p>
@@ -180,14 +180,14 @@
 @endif
 
 <p>
-    {{ __('invoice.payment.total_amount.label') }}: {{ $invoice->registration->totalAmountInWords() }}
+    {{ __('invoice.payment.total_amount.label') }}: {{ $invoice->walker->amountInWords() }}
 </p>
 
 <h3 class="text-2xl font-semibold walker-primary my-2">
     {{__('invoices::messages.invoice.payment.title')}}
 </h3>
 
-<x-payment-information :amount="$invoice->registration->totalAmountInWords()" :communication="$invoice->registration->communication()"/>
+<x-payment-information :amount="$invoice->walker->amountInWords()" :communication="$invoice->walker->communication()"/>
 @include('invoices::pdf.qrcode')
 
 </body>

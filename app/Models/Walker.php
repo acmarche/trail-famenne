@@ -78,11 +78,11 @@ class Walker extends Model
 
     public function amount(): float
     {
-        if ($this->tshirt_size->value !== TshirtEnum::NO->value) {
-            return 50;
+        if (!is_null($this->date_payment) && Carbon::parse($this->date_payment)->lt(Carbon::create(2025, 8, 1))) {
+            return 45;
         }
 
-        return 45;
+        return 50;
     }
 
     public function isPaid(): bool
@@ -95,14 +95,14 @@ class Walker extends Model
         return Number::currency($this->amount(), in: 'EUR', locale: 'be');
     }
 
-    public static  function allcount(): int
+    public static function countAll(): int
     {
         return self::get()->count();
     }
 
-    public static function registrationsNotPaidCount(): int
+    public static function registrationsUnpaidCount(): int
     {
-       return self::whereNull('payment_date')->count();
+        return self::whereNull('payment_date')->count();
     }
 
     public static function registrationsPaidCount(): int

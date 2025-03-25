@@ -38,7 +38,7 @@ class QrCodeGenerator
     {
         $qrCode = QrCodeGenerator::make('Invoice-'.$walker->id)
             ->id($walker->id)
-            ->amount($walker->totalAmount())
+            ->amount($walker->amount())
             ->communication($walker->communication());
         $qrCode->generate();
     }

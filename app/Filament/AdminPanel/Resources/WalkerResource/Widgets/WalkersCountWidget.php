@@ -15,7 +15,7 @@ class WalkersCountWidget extends BaseWidget
 
     protected function getStats(): array
     {
-        $walkersCountUnpaid = Walker::registrationsNotPaidCount();
+        $walkersCountUnpaid = Walker::registrationsUnpaidCount();
         $walkersCountPaid = Walker::registrationsPaidCount();
 
         return [

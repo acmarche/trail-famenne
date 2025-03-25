@@ -19,8 +19,8 @@ class ListWalkers extends ListRecords
 
     public function __construct()
     {
-        $this->walkersAll = Walker::allcount();
-        $this->walkersCountUnpaid = Walker::registrationsNotPaidCount();
+        $this->walkersAll = Walker::countAll();
+        $this->walkersCountUnpaid = Walker::registrationsUnpaidCount();
         $this->walkersCountPaid = Walker::registrationsPaidCount();
     }
 

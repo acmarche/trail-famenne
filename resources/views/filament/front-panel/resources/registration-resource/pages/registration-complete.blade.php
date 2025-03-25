@@ -23,7 +23,7 @@
         {{__('invoices::messages.walkers.list')}}
     </h3>
 
-    <x-list-walkers :walkers="$record->walkers" :amount="$record->totalAmountInWords()"/>
+    <x-list-walkers :walker="$record->walker" :amount="$record->totalAmountInWords()"/>
 
     @if(!$record->isPaid())
         <h3 class="text-2xl font-semibold walker-secondary my-2">

@@ -7,20 +7,17 @@
     </tr>
     </thead>
     <tbody>
-    {{-- Items --}}
-    @foreach($walkers as $item)
-        <tr>
-            <td class="pl-0">
-                {{ $item->name() }}
-            </td>
-            <td class="text-center">
-                {{ $item->tshirt_size->value }}
-            </td>
-            <td class="text-right">
-                {{ $item->amountInWords() }}
-            </td>
-        </tr>
-    @endforeach
+    <tr>
+        <td class="pl-0">
+            {{ $walker->name() }}
+        </td>
+        <td class="text-center">
+            {{ $walker->tshirt_size->value }}
+        </td>
+        <td class="text-right">
+            {{ $walker->amountInWords() }}
+        </td>
+    </tr>
     <tr>
         <td colspan="3">&nbsp;</td>
     </tr>

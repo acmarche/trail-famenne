@@ -35,7 +35,7 @@ trait PdfHelper
     public static function generatePdfAndSaveIt(Walker $record): void
     {
         Invoice::make('Invoice-'.$record->id)
-            ->registration($record)
+            ->walker($record)
             ->buyer(Buyer::newFromWalker($record))
             ->logo(self::logoToBase64())
             ->render()
@@ -74,7 +74,7 @@ trait PdfHelper
         $fileScanning = public_path('images/qr-code-scanning2.jpg');
         $qrCodeScanning = FileUtils::convertToBase64($fileScanning);
 
-        if ($this->registration->isPaid()) {
+        if ($this->walker->isPaid()) {
             $qrCodeFile = null;
         } else {
             $qrCodeFile = $this

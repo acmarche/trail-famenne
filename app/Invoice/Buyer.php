@@ -17,7 +17,6 @@ class Buyer
         $buyer = new self();
         $buyer->email = $walker->email;
         $buyer->name = $walker->first_name.' '.$walker->last_name;
-        $buyer->address = $walker->street;
         $buyer->city = $walker->city;
         $buyer->phone = $walker->phone;
 

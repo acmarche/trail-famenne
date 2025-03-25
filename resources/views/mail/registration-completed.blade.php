@@ -8,7 +8,7 @@
 
 # {{ config('app.name') }}
 
-## Welcome {{$registration->firstWalker->first_name}} {{$registration->firstWalker->last_name}} :joy:
+## Welcome {{$walker->first_name}} {{$walker->last_name}} :joy:
 
 <x-mail::panel style="margin-top: 20px;margin-bottom: 20px;">
 <p style="color: #9f1239;font-weight: bold;">
@@ -21,15 +21,13 @@
 <x-mail::table>
 | ##{{__('invoices::messages.last_name')}}  | ## {{__('invoices::messages.tshirt_size')}}  | ## {{__('invoices::messages.invoice.price')}}  |
 | -------- | -------- | -------|
-@foreach($registration->walkers as $item)
-| {{$item->name()}} | {{$item->tshirt_size}} | {{$item->amountInWords()}} |
-@endforeach
+| {{$walker->name()}} | {{$walker->tshirt_size}} | {{$walker->amountInWords()}} |
 </x-mail::table>
 ---
 
 ## {{__('invoices::messages.invoice.payment.title')}}
 
-<x-payment-information :amount="$registration->totalAmountInWords()" :communication="$registration->communication()" :markdown="true"/>
+<x-payment-information :amount="$walker->amountInWords()" :communication="$walker->communication()" :markdown="true"/>
 
 @if(isset($qrCode))
 <img src="{{$message->embed($qrCode)}}" alt="qrcode" height="150">

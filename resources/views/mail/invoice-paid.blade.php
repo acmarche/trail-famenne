@@ -8,7 +8,7 @@
 
     # {{ config('app.name') }}
 
-    ## Thanks for your paid {{$registration->firstWalker->first_name}} {{$registration->firstWalker->last_name}} :joy:
+    ## Thanks for your paid {{$walker->first_name}} {{$walker->last_name}} :joy:
 
     <x-mail::panel style="margin-top: 20px;margin-bottom: 20px;">
         <p style="color: #26e854;font-weight: bold;">
@@ -19,11 +19,10 @@
     ## {{__('invoices::messages.walkers')}}
 
     <x-mail::table>
-        | ##{{__('invoices::messages.last_name')}}  | ## {{__('invoices::messages.tshirt_size')}}  | ## {{__('invoices::messages.invoice.price')}}  |
+        | ##{{__('invoices::messages.last_name')}} | ## {{__('invoices::messages.tshirt_size')}} |
+        ## {{__('invoices::messages.invoice.price')}} |
         | -------- | -------- | -------|
-        @foreach($registration->walkers as $item)
-            | {{$item->name()}} | {{$item->tshirt_size}} | {{$item->amountInWords()}} |
-        @endforeach
+        | {{$walker->name()}} | {{$walker->tshirt_size}} | {{$walker->amountInWords()}} |
     </x-mail::table>
     ---
 
