@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\Walker;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\TextColumn;
@@ -46,23 +47,23 @@ class GenerateNumber extends Page implements HasTable, HasForms
                 TextColumn::make('tshirt_number')
                     ->label('Numéro de T-shirt'),
             ])
-            ->filters([
-                // ...
-            ])
             ->headerActions([
                 Action::make('generate')
                     ->label('Générer les numéros')
                     ->requiresConfirmation()
                     ->action(function () {
-                        $i = 0;
+                        $i = 1;
                         foreach (Walker::canHaveTshirts()->get() as $walker) {
-                            $walker->tshirt_number = $i + 1;
+                            $walker->tshirt_number = $i;
                             $walker->save();
+                            $i++;
                         }
+                        Notification::make()
+                            ->title('Numéros générés')
+                            ->success()
+                            ->send();
+                        $this->redirect(request()->header('referer'));
                     }),
-            ])
-            ->bulkActions([
-                // ...
             ]);
     }
 

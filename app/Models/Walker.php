@@ -116,8 +116,9 @@ class Walker extends Model
     public static function canHaveTshirts(): Builder
     {
         return self::query()
-            ->where('payment_date', '<', config('invoices.TRAIL_TSHIRT_ENDDATE'))
-            ->orderBy(['last_name', 'first_name'], 'asc');
+            ->where('payment_date', '<', Carbon::parse(config('invoices.TRAIL_TSHIRT_ENDDATE')))
+            ->orderBy('last_name', 'asc')
+            ->orderBy('first_name', 'asc');
     }
 
 
