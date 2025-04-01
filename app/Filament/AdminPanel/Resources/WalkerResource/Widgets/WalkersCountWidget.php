@@ -15,8 +15,8 @@ class WalkersCountWidget extends BaseWidget
 
     protected function getStats(): array
     {
-        $walkersCountUnpaid = Walker::registrationsUnpaidCount();
-        $walkersCountPaid = Walker::registrationsPaidCount();
+        $walkersCountUnpaid = Walker::unpaidCount();
+        $walkersCountPaid = Walker::paidCount();
 
         return [
             Stat::make('Marcheurs validés', $walkersCountPaid)

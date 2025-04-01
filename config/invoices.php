@@ -3,6 +3,7 @@
 
 return [
     'MAIL_IT_ADDRESS' => env('MAIL_IT_ADDRESS'),
+    'TRAIL_TSHIRT_ENDDATE' => env('TRAIL_TSHIRT_ENDDATE'),
     'seller' =>
         [
             'name' => env('APP_NAME'),

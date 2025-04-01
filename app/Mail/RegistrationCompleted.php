@@ -5,7 +5,6 @@ namespace App\Mail;
 use App\Filament\FrontPanel\Resources\WalkerResource;
 use App\Invoice\Facades\Invoice;
 use App\Invoice\Facades\QrCodeGenerator;
-
 use App\Models\Walker;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -25,7 +24,9 @@ class RegistrationCompleted extends Mailable
     public ?string $logo = null;
     public ?string $qrcode = null;
 
-    public function __construct(public readonly Walker $walker) {}
+    public function __construct(public readonly Walker $walker)
+    {
+    }
 
     /**
      * Get the message envelope.
@@ -56,7 +57,7 @@ class RegistrationCompleted extends Mailable
             markdown: 'mail.registration-completed',
             with: [
                 'textbtn' => __('invoices::messages.email.registration.confirm.btn.label'),
-                'url' => WalkerResource::getUrl('complete', ['record' => $this->walker]),
+                'url' => WalkerResource::getUrl('complete', ['record' => $this->walker], panel: 'front'),
                 'logo' => $this->logo,
                 'qrCode' => $this->qrcode,
             ],
@@ -72,11 +73,11 @@ class RegistrationCompleted extends Mailable
                 ->withMime('image/jpg');
 
         $invoicePath = Invoice::make()
-            ->registration($this->registration)
+            ->walker($this->walker)
             ->invoicePath();
 
         $invoiceFileName = Invoice::make()
-            ->registration($this->registration)
+            ->walker($this->walker)
             ->invoiceFileName();
 
         if (is_file($invoicePath)) {

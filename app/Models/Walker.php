@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Constant\SexEnum;
 use App\Constant\TshirtEnum;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -102,14 +103,21 @@ class Walker extends Model
         return self::get()->count();
     }
 
-    public static function registrationsUnpaidCount(): int
+    public static function unpaidCount(): int
     {
         return self::whereNull('payment_date')->count();
     }
 
-    public static function registrationsPaidCount(): int
+    public static function paidCount(): int
     {
         return self::whereNotNull('payment_date')->count();
+    }
+
+    public static function canHaveTshirts(): Builder
+    {
+        return self::query()
+            ->where('payment_date', '<', config('invoices.TRAIL_TSHIRT_ENDDATE'))
+            ->orderBy(['last_name', 'first_name'], 'asc');
     }
 
 

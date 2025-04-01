@@ -67,16 +67,16 @@ class Message extends Page implements HasForms
 
     private function sendMessage(string $subject, string $message): void
     {
-        $emails = Walker::whereHas('registration', function ($query) {
-            $query->whereNotNull('payment_date');
-        })
+        $emails = Walker::whereNotNull('payment_date')
             ->distinct()
             ->pluck('email');
         foreach ($emails as $email) {
             try {
                 Mail::to(new Address('jf@marche.be', $email))
-                    ->send((new ContactMessage($message))
-                        ->subject($subject));
+                    ->send(
+                        (new ContactMessage($message))
+                            ->subject($subject)
+                    );
             } catch (\Exception $e) {
                 dd($e->getMessage());
             }

@@ -161,11 +161,11 @@
         </td>
         <td class="border-0 pl-0">
             <h4 class="text-uppercase cool-gray">
-                <strong>{{ $invoice->registration->statusText() }}</strong>
+                <strong>{{ $invoice->walker->statusText() }}</strong>
             </h4>
-            <p>{{ __('invoices::messages.invoice.serial') }} <strong>{{ $invoice->registration->id }}</strong></p>
+            <p>{{ __('invoices::messages.invoice.serial') }} <strong>{{ $invoice->walker->id }}</strong></p>
             <p>{{ __('invoices::messages.invoice.date') }}:
-                <strong>{{ $invoice->registration->registrationDateFormated() }}</strong></p>
+                <strong>{{ $invoice->walker->registrationDateFormated() }}</strong></p>
         </td>
     </tr>
     </tbody>
