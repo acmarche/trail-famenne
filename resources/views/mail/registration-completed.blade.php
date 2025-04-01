@@ -19,7 +19,7 @@
 ## {{__('invoices::messages.walkers')}}
 
 <x-mail::table>
-| ##{{__('invoices::messages.last_name')}}  | ## {{__('invoices::messages.tshirt_size')}}  | ## {{__('invoices::messages.invoice.price')}}  |
+| ##{{__('invoices::messages.last_name')}}  | ## {{__('invoices::messages.tshirt_size.label')}}  | ## {{__('invoices::messages.invoice.price')}}  |
 | -------- | -------- | -------|
 | {{$walker->name()}} | {{$walker->tshirt_size}} | {{$walker->amountInWords()}} |
 </x-mail::table>

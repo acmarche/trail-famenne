@@ -70,6 +70,8 @@ class ViewWalker extends ViewRecord
                                     ->dateTime(),
                                 Infolists\Components\TextEntry::make('tshirt_size')
                                     ->label('T-shirt'),
+                                Infolists\Components\TextEntry::make('tshirt_sex')
+                                    ->label('Découpe t-shirt'),
                                 Infolists\Components\TextEntry::make('registration_date')
                                     ->label('Date d\'inscription')
                                     ->dateTime(),

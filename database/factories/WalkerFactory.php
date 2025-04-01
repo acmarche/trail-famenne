@@ -24,7 +24,6 @@ class WalkerFactory extends Factory
             'phone' => fake()->phoneNumber(),
             'city' => fake()->city(),
             'country' => fake()->country(),
-            'tshirt_size' => TshirtEnum::M->value,
         ];
     }
 }

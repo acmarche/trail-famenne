@@ -30,9 +30,9 @@ class Tshirts extends Page implements HasForms, HasTable
      * @param Model $record
      * @return string
      */
-   public function getTableRecordKey(Model $record): string
+    public function getTableRecordKey(Model $record): string
     {
-        return (string) $record->id;
+        return (string)$record->id;
     }
 
     public function table(Table $table): Table
@@ -40,11 +40,14 @@ class Tshirts extends Page implements HasForms, HasTable
         return $table
             ->query(
                 Walker::query()
-                    ->selectRaw('tshirt_size, COUNT(*) as count')
-                    ->groupBy('tshirt_size'),
+                    ->selectRaw('tshirt_size,tshirt_sex, COUNT(*) as count')
+                    ->groupBy('tshirt_size', 'tshirt_sex'),
             )
             ->columns([
-                TextColumn::make('tshirt_size'),
+                TextColumn::make('tshirt_size')
+                    ->label(__('invoices::messages.tshirt_size.label')),
+                TextColumn::make('tshirt_sex')
+                    ->label(__('invoices::messages.tshirt_sex.label')),
                 TextColumn::make('count'),
             ])
             ->filters([

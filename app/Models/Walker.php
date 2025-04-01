@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Constant\SexEnum;
 use App\Constant\TshirtEnum;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -36,12 +37,13 @@ class Walker extends Model
     {
         return [
             'tshirt_size' => TshirtEnum::class,
+            'tshirt_sex' => SexEnum::class,
         ];
     }
 
     public function statusText(): string
     {
-        return $this->isPaid() ? __('messages.invoice.paid') : __('messages.invoice.unpaid');
+        return $this->isPaid() ? __('invoices::messages.invoice.paid') : __('invoices::messages.invoice.unpaid');
     }
 
     public function registrationDateFormated(): string

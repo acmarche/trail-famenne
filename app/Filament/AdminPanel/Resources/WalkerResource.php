@@ -106,8 +106,8 @@ class WalkerResource extends Resource
                     ->modalIconColor(
                         fn(Walker $walker): string => $walker->isPaid() ? 'success' : 'warning',
                     )
-                    ->modalHeading(__('Payer la facture'))
-                    ->modalDescription(__('Confirmer que la facture a été payée.')),
+                    ->modalHeading('Payer la facture')
+                    ->modalDescription('Confirmer que la facture a été payée.'),
                 Tables\Actions\ViewAction::make()
                     ->label('Visualiser')
                     ->icon('tabler-eye'),

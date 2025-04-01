@@ -15,9 +15,9 @@ enum DisplayNameEnum: string implements HasLabel, HasIcon
     public function getLabel(): ?string
     {
         return match ($this) {
-            self::ANONYMOUS => __('messages.display_name.anonymous.label'),
-            self::FIRST_NAME => __('messages.display_name.first_name.label'),
-            self::FULL_NAME => __('messages.display_name.full_name.label'),
+            self::ANONYMOUS => __('invoices::messages.display_name.anonymous.label'),
+            self::FIRST_NAME => __('invoices::messages.display_name.first_name.label'),
+            self::FULL_NAME => __('invoices::messages.display_name.full_name.label'),
         };
     }
 

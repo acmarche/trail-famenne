@@ -93,7 +93,7 @@ class FrontPanelProvider extends PanelProvider
             ->navigationItems([
                 NavigationItem::make('dashboard admin')
                     ->icon('heroicon-o-cog-6-tooth')
-                    ->label(fn(): string => __('messages.navigation.admin.dashboard.label'))
+                    ->label(fn(): string => __('invoices::messages.navigation.admin.dashboard.label'))
                     ->url('/admin')
                     ->group('Administration')
                     ->visible(function (): bool {

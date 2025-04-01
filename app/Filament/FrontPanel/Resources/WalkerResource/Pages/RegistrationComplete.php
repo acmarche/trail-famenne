@@ -49,7 +49,7 @@ class RegistrationComplete extends Page
 
     public function getTitle(): string|Htmlable
     {
-        return __('messages.form.registration.actions.edit.title');
+        return __('invoices::messages.form.registration.actions.edit.title');
     }
 
     protected function getHeaderActions(): array

@@ -34,7 +34,7 @@ class RegistrationCompleted extends Mailable
     {
         return new Envelope(
             from: new Address(config('mail.from.address'), config('APP_NAME')),
-            subject: __('messages.email.registration.confirm.subject'),
+            subject: __('invoices::messages.email.registration.confirm.subject'),
         );
     }
 
@@ -55,7 +55,7 @@ class RegistrationCompleted extends Mailable
         return new Content(
             markdown: 'mail.registration-completed',
             with: [
-                'textbtn' => __('messages.email.registration.confirm.btn.label'),
+                'textbtn' => __('invoices::messages.email.registration.confirm.btn.label'),
                 'url' => WalkerResource::getUrl('complete', ['record' => $this->walker]),
                 'logo' => $this->logo,
                 'qrCode' => $this->qrcode,

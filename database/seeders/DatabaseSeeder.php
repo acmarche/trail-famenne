@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Constant\SexEnum;
 use App\Constant\TshirtEnum;
 use App\Models\Role;
 use App\Models\User;
@@ -38,14 +39,20 @@ class DatabaseSeeder extends Seeder
 
         User::factory(4)->hasAttached($adminRole)->create();
 
-        Walker::factory(10)->create([
-            'tshirt_size' => $this->randomShirt(),
+        Walker::factory(25)->create([
+            'tshirt_size' => $this->randomShirtSize(),
+            'tshirt_sex' => $this->randomShirtSex(),
         ]);
 
     }
 
-    private function randomShirt(): TshirtEnum
+    private function randomShirtSize(): TshirtEnum
     {
         return TshirtEnum::from(array_rand(array_flip(array_map(fn($case) => $case->value, TshirtEnum::cases()))));
+    }
+
+    private function randomShirtSex(): SexEnum
+    {
+        return SexEnum::from(array_rand(array_flip(array_map(fn($case) => $case->value, SexEnum::cases()))));
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Constant\SexEnum;
 use App\Constant\TshirtEnum;
 use App\Filament\FrontPanel\Resources\Pages\InformationPage;
 use Filament\Forms\Components\Actions\Action;
@@ -91,13 +92,20 @@ class WalkerForm
                         ->helperText(__('invoices::messages.date_of_birth.help'))
                         ->required()
                         ->maxDate(now())
-                        ->date(),
+                        ->date()
+                        ->columnSpanFull(),
                     Select::make('tshirt_size')
-                        ->label(__('invoices::messages.tshirt_size'))
-                        ->helperText(__('invoices::messages.tshirt.help'))
+                        ->label(__('invoices::messages.tshirt_size.label'))
+                        ->helperText(__('invoices::messages.tshirt_size.help'))
                         ->default(TshirtEnum::NO->value)
                         ->options(TshirtEnum::class)
                         ->suffixIcon('tabler-shirt-sport'),
+                    Select::make('tshirt_sex')
+                        ->label(__('invoices::messages.tshirt_sex.label'))
+                        ->helperText(__('invoices::messages.tshirt_sex.help'))
+                        ->placeholder('')
+                        ->options(SexEnum::class)
+                        ->suffixIcon('tabler-gender-hermaphrodite'),
                 ]),
         ];
     }
@@ -112,7 +120,8 @@ class WalkerForm
                         'md' => 2,
                         'lg' => 2,
                         'xl' => 2,
-                    ])
+                    ]
+                )
                 ->schema([
                     TextInput::make('city')
                         ->label(__('invoices::messages.city'))
@@ -126,19 +135,19 @@ class WalkerForm
 
     private static function fieldsGdpr(): array
     {
-        $url = InformationPage::getUrl(panel:'front');
+        $url = InformationPage::getUrl(panel: 'front');
         $labelRegulation = __('invoices::messages.regulation.label');
 
         return [
             Checkbox::make('newsletter_accepted')
-                ->label(__('messages.form.registration.actions.newsletter_accepted.label'))
+                ->label(__('invoices::messages.form.registration.actions.newsletter_accepted.label'))
                 ->required(false),
             Checkbox::make('gdpr_accepted')
                 ->required()
-                ->label(__('messages.form.registration.actions.gdpr_accepted.label')),
+                ->label(__('invoices::messages.form.registration.actions.gdpr_accepted.label')),
             Checkbox::make('regulation_accepted')
                 ->required()
-                ->label(__('messages.form.registration.actions.regulation_accepted.label')),
+                ->label(__('invoices::messages.form.registration.actions.regulation_accepted.label')),
             Placeholder::make('documentation')
                 ->label(__('invoices::messages.documentation'))
                 ->content(new HtmlString('<a href="'.$url.'" target="_blank">'.$labelRegulation.'</a>')),

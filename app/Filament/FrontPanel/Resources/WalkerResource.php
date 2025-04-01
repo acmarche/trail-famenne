@@ -61,12 +61,12 @@ class WalkerResource extends Resource
 
     public static function getNavigationLabel(): string
     {
-        return __('messages.registration.navigation.label');
+        return __('invoices::messages.registration.navigation.label');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('messages.registration.navigation.plural.model.label');
+        return __('invoices::messages.registration.navigation.plural.model.label');
     }
 
 }

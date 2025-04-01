@@ -43,9 +43,9 @@ class WalkersPage extends Page implements HasTable
             ->query(Walker::query()->whereNotNull('payment_date'))
             ->columns([
                 TextColumn::make('first_name')
-                    ->label(__('messages.first_name')),
+                    ->label(__('invoices::messages.first_name')),
                 TextColumn::make('last_name')
-                    ->label(__('messages.last_name')),
+                    ->label(__('invoices::messages.last_name')),
             ])
             ->filters([
                 // ...

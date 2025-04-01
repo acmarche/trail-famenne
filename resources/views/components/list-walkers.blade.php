@@ -2,7 +2,7 @@
     <thead>
     <tr>
         <th scope="col" class="border-0 pl-0">{{__('invoices::messages.last_name')}}</th>
-        <th scope="col" class="text-center border-0">{{__('invoices::messages.tshirt_size')}}</th>
+        <th scope="col" class="text-center border-0">{{__('invoices::messages.tshirt_size.label')}}</th>
         <th scope="col" class="text-right border-0">{{__('invoices::messages.invoice.price')}}</th>
     </tr>
     </thead>
