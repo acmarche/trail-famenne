@@ -20,7 +20,7 @@ class GenerateNumber extends Page implements HasTable, HasForms
     use InteractsWithTable;
     use InteractsWithForms;
 
-    protected static ?string $title = 'T-shirts numéros';
+    protected static ?string $title = 'Numérotation des T-shirts';
     protected static ?string $navigationGroup = 'Administration';
     protected static ?string $navigationIcon = 'tabler-shirt-sport';
     protected static string $view = 'filament.pages.tshirts';
