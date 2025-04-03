@@ -98,6 +98,11 @@ class Walker extends Model
         return Number::currency($this->amount(), in: 'EUR', locale: 'be');
     }
 
+    public function age(): float
+    {
+        return round(Carbon::parse($this->date_of_birth)->diffInYears(Carbon::now()));
+    }
+
     public static function countAll(): int
     {
         return self::get()->count();

@@ -24,6 +24,8 @@ class WalkerFactory extends Factory
             'phone' => fake()->phoneNumber(),
             'city' => fake()->city(),
             'country' => fake()->country(),
+            'date_of_birth' => fake()->date(),
+            'gdpr_accepted' => fake()->boolean(1),
         ];
     }
 }

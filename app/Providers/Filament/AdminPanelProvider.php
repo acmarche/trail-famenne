@@ -2,10 +2,12 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\AdminPanel\Resources\WalkerResource\Widgets\WalkersChartBirthdayWidget;
+use App\Filament\AdminPanel\Resources\WalkerResource\Widgets\WalkersChartCountryWidget;
+use App\Filament\AdminPanel\Resources\WalkerResource\Widgets\WalkersChartNewsletterWidget;
 use App\Filament\AdminPanel\Resources\WalkerResource\Widgets\WalkersCountWidget;
 use App\Filament\Pages\Auth\Login;
 use App\Http\Middleware\SetLocaleLanguage;
-use App\Models\Role;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -49,6 +51,9 @@ class AdminPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/AdminPanel/Widgets'), for: 'App\\Filament\\AdminPanel\\Widgets')
             ->widgets([
                 WalkersCountWidget::class,
+                WalkersChartBirthdayWidget::class,
+                WalkersChartCountryWidget::class,
+                WalkersChartNewsletterWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -65,7 +70,6 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-
             ->navigationItems([
                 NavigationItem::make('return_front')
                     ->icon('tabler-arrow-badge-left')
