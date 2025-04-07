@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 
 class WalkersChartCountryWidget extends ChartWidget
 {
+    protected static ?string $heading = 'Par région';
+
     protected function getData(): array
     {
         $query = DB::table('walkers')->whereNotNull('payment_date');
@@ -19,7 +21,7 @@ class WalkersChartCountryWidget extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => 'Newsletter Distribution',
+                    'label' => 'Country Distribution',
                     'data' => array_values($countryData),
                     'backgroundColor' => [
                         'rgb(255, 99, 132)',
