@@ -7,6 +7,7 @@ use App\Invoice\Invoice;
 use App\Mail\InvoicePaid;
 use App\Mail\RegistrationCompleted;
 use App\Models\Walker;
+use App\Utils\RegistrationUtils;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Support\Facades\Mail;
 use Symfony\Component\Mime\Address;
@@ -21,6 +22,8 @@ class SendRegistrationNotification
     public function handle(RegistrationProcessed $event): void
     {
         $walker = $event->walker();
+        $walker->registration_id = RegistrationUtils::lastRegistrationId() +1 ;
+        $walker->save();
 
         try {
             Invoice::generateWithQrCode($walker);

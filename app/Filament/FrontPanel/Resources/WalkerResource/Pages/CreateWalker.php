@@ -47,9 +47,17 @@ class CreateWalker extends CreateRecord
      * Remove btn confirm
      * @return array|Action[]|\Filament\Actions\ActionGroup[]
      */
-    public function getFormActions(): array
+    public function getFormActions22(): array
     {
         return [];
+    }
+
+    protected function getCreateFormAction(): Action
+    {
+        return Action::make('create')
+            ->label(__('invoices::messages.form.walker.actions.create.label'))
+            ->submit('create')
+            ->keyBindings(['mod+s']);
     }
 
     public function getSubheading(): string

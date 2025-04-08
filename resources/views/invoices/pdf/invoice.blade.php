@@ -163,7 +163,7 @@
             <h4 class="text-uppercase cool-gray">
                 <strong>{{ $invoice->walker->statusText() }}</strong>
             </h4>
-            <p>{{ __('invoices::messages.invoice.serial') }} <strong>{{ $invoice->walker->id }}</strong></p>
+            <p>{{ __('invoices::messages.invoice.serial') }} <strong>{{ $invoice->walker->registration_id }}</strong></p>
             <p>{{ __('invoices::messages.invoice.date') }}:
                 <strong>{{ $invoice->walker->registrationDateFormated() }}</strong></p>
         </td>
@@ -180,7 +180,7 @@
 @endif
 
 <p>
-    {{ __('invoice.payment.total_amount.label') }}: {{ $invoice->walker->amountInWords() }}
+    {{ __('invoice.payment.amount.label') }}: {{ $invoice->walker->amountInWords() }}
 </p>
 
 <h3 class="text-2xl font-semibold walker-primary my-2">

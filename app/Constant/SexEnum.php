@@ -14,8 +14,8 @@ enum SexEnum: string implements HasLabel, HasColor, HasIcon
     public function getLabel(): ?string
     {
         return match ($this) {
-            self::WOMAN => __(self::WOMAN->value),
-            self::MAN => __(self::MAN->value),
+            self::WOMAN => __('invoices::messages.WOMAN'),
+            self::MAN => __('invoices::messages.MAN'),
         };
     }
 

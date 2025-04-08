@@ -13,7 +13,7 @@
                 </x-alert>
             @else
                 <x-alert type="danger">
-                    {{__('invoices::messages.form.registration.notification.finish.body')}}
+                    {{__('invoices::messages.form.registration.notification.finish.body')}} {{$registrationEndDate}}
                 </x-alert>
             @endif
         </div>
@@ -23,14 +23,14 @@
         {{__('invoices::messages.walkers.list')}}
     </h3>
 
-    <x-list-walkers :walker="$record->walker" :amount="$record->totalAmountInWords()"/>
+    <x-list-walkers :walker="$record" :amount="$record->amountInWords()"/>
 
     @if(!$record->isPaid())
         <h3 class="text-2xl font-semibold walker-secondary my-2">
             {{__('invoices::messages.invoice.payment.title')}}
         </h3>
 
-        <x-payment-information :amount="$record->totalAmountInWords()" :communication="$record->communication()"/>
+        <x-payment-information :amount="$record->amountInWords()" :communication="$record->communication()"/>
 
         @include('invoices::pdf.qrcode')
     @endif

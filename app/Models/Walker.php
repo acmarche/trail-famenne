@@ -54,7 +54,7 @@ class Walker extends Model
 
     public function communication(): string
     {
-        return '100Km fact '.rand(1, 1000);//todo change it
+        return '100Km num '.$this->registration_id;
     }
 
     public function runnersPaid(): array

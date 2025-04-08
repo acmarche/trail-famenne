@@ -5,14 +5,13 @@ namespace App\Form;
 use App\Constant\SexEnum;
 use App\Constant\TshirtEnum;
 use App\Filament\FrontPanel\Resources\Pages\InformationPage;
-use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\Wizard;
 use Filament\Forms\Form;
 use Illuminate\Support\HtmlString;
 
@@ -24,35 +23,19 @@ class WalkerForm
             ->live()
             ->columns(1)
             ->schema([
-                Wizard::make([
-                    Wizard\Step::make('necessary_data')
-                        ->label(__('invoices::messages.form.registration.walkers.step1.label'))
-                        ->schema(
-                            self::fieldsPersonal(),
-                        ),
-                    Wizard\Step::make('contact')
-                        ->label(__('invoices::messages.form.registration.walkers.step2.label'))
-                        ->schema(
-                            self::fieldsContact(),
-                        ),
-                    Wizard\Step::make('dgpr')
-                        ->label(__('invoices::messages.form.registration.walkers.step3.label'))
-                        ->schema(
-                            self::fieldsGdpr(),
-                        ),
-                ])
-                    ->nextAction(
-                        fn(Action $action) => $action->label(
-                            __('invoices::messages.form.registration.actions.next.label')
-                        )->color('success'),
-                    )->previousAction(
-                        fn(Action $action) => $action->label(
-                            __('invoices::messages.form.registration.actions.previous.label')
-                        )->color('warning'),
-                    )
-                    ->submitAction(view('filament.front-panel.resources.bnt_add_walker')),
+                Section::make(__('invoices::messages.form.registration.walkers.step1.label'))
+                    ->schema(
+                        self::fieldsPersonal(),
+                    ),
+                Section::make(__('invoices::messages.form.registration.walkers.step2.label'))
+                    ->schema(
+                        self::fieldsContact(),
+                    ),
+                Section::make(__('invoices::messages.form.registration.walkers.step3.label'))
+                    ->schema(
+                        self::fieldsGdpr(),
+                    ),
             ]);
-
     }
 
     private static function fieldsPersonal(): array
@@ -87,23 +70,18 @@ class WalkerForm
                         ->label(__('invoices::messages.phone'))
                         ->required()
                         ->tel(),
-                    DatePicker::make('date_of_birth')
-                        ->label(__('invoices::messages.date_of_birth.label'))
-                        ->helperText(__('invoices::messages.date_of_birth.help'))
-                        ->required()
-                        ->maxDate(now())
-                        ->date()
-                        ->columnSpanFull(),
                     Select::make('tshirt_size')
                         ->label(__('invoices::messages.tshirt_size.label'))
                         ->helperText(__('invoices::messages.tshirt_size.help'))
-                        ->default(TshirtEnum::NO->value)
+                        // ->default(TshirtEnum::NO->value)
+                        ->required()
                         ->options(TshirtEnum::class)
                         ->suffixIcon('tabler-shirt-sport'),
                     Select::make('tshirt_sex')
                         ->label(__('invoices::messages.tshirt_sex.label'))
                         ->helperText(__('invoices::messages.tshirt_sex.help'))
                         ->placeholder('')
+                        ->required()
                         ->options(SexEnum::class)
                         ->suffixIcon('tabler-gender-hermaphrodite'),
                 ]),
@@ -123,6 +101,15 @@ class WalkerForm
                     ]
                 )
                 ->schema([
+                    DatePicker::make('date_of_birth')
+                        ->label(__('invoices::messages.date_of_birth.label'))
+                        ->helperText(__('invoices::messages.date_of_birth.help'))
+                        ->required()
+                        ->maxDate(now())
+                        ->date(),
+                    TextInput::make('club_name')
+                        ->label(__('invoices::messages.club_name'))
+                        ->maxLength(150),
                     TextInput::make('city')
                         ->label(__('invoices::messages.city'))
                         ->maxLength(150),
@@ -151,7 +138,7 @@ class WalkerForm
             Placeholder::make('documentation')
                 ->label(__('invoices::messages.documentation'))
                 ->content(new HtmlString('<a href="'.$url.'" target="_blank">'.$labelRegulation.'</a>')),
-            Checkbox::make('display_name')
+            Checkbox::make('display_accepted')
                 ->label(__('invoices::messages.display_name')),
         ];
     }

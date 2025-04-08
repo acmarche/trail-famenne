@@ -13,6 +13,7 @@ return new class extends Migration {
     {
         Schema::create('walkers', function (Blueprint $table) {
             $table->uuid('id')->primary()->unique();
+            $table->integer('registration_id')->unique()->nullable();
             $table->string('email')->nullable();
             $table->string('last_name');
             $table->string('first_name');

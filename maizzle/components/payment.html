@@ -1,0 +1,27 @@
+<script props>
+  module.exports = {
+    walker: props.walker,
+    bankAccount: props.bankAccount,
+  }
+</script>
+<x-spacer height="24px"/>
+@{{__('invoices::messages.invoice.payment.title')}}
+<x-spacer height="24px"/>
+<table class="my-1 text-left">
+  <tr>
+    <th>@{{__('invoices::messages.invoice.payment.for.label')}}</th>
+    <td>@{{$walker->first_name}} @{{$walker->last_name}}</td>
+  </tr>
+  <tr>
+    <th>@{{__('invoices::messages.invoice.payment.iban.label')}}</th>
+    <td>@{{$bankAccount}}</td>
+  </tr>
+  <tr>
+    <th>@{{__('invoices::messages.invoice.payment.communication.label')}}</th>
+    <td>@{{$walker->communication()}}</td>
+  </tr>
+  <tr>
+    <th>@{{__('invoices::messages.invoice.payment.total_amount.label')}}</th>
+    <td>@{{$walker->amountInWords()}}</td>
+  </tr>
+</table>

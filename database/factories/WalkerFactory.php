@@ -20,6 +20,7 @@ class WalkerFactory extends Factory
         return [
             'first_name' => fake()->firstName(),
             'last_name' => fake()->lastName(),
+            'registration_id' => rand(1, 9999),
             'email' => fake()->unique()->safeEmail(),
             'phone' => fake()->phoneNumber(),
             'city' => fake()->city(),

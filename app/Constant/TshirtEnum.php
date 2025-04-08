@@ -19,7 +19,7 @@ enum TshirtEnum: string implements HasLabel, HasColor, HasIcon
     public function getLabel(): ?string
     {
         return match ($this) {
-            self::NO => __(self::NO->value),
+            self::NO => __('invoices::messages.NONE'),
             self::XS => self::XS->value,
             self::S => self::S->value,
             self::M => self::M->value,

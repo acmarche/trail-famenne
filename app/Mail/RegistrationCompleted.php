@@ -13,6 +13,7 @@ use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Carbon;
 
 /**
  * https://maizzle.com/docs/components // todo
@@ -23,6 +24,8 @@ class RegistrationCompleted extends Mailable
 
     public ?string $logo = null;
     public ?string $qrcode = null;
+    public ?string $bankAccount = null;
+    public ?string $registrationEndDate = null;
 
     public function __construct(public readonly Walker $walker)
     {
@@ -53,13 +56,18 @@ class RegistrationCompleted extends Mailable
             ->id($this->walker->id)
             ->qrCodePath();
 
+        $this->bankAccount = config('seller.bank_account');
+        $this->registrationEndDate = Carbon::parse(config('invoices.TRAIL_TSHIRT_ENDDATE'))->translatedFormat('j F Y');
+
         return new Content(
-            markdown: 'mail.registration-completed',
+            view: 'emails.registration',
             with: [
                 'textbtn' => __('invoices::messages.email.registration.confirm.btn.label'),
                 'url' => WalkerResource::getUrl('complete', ['record' => $this->walker], panel: 'front'),
                 'logo' => $this->logo,
                 'qrCode' => $this->qrcode,
+                'banckAccount' => $this->bankAccount,
+                'registrationEndDate' => $this->registrationEndDate,
             ],
         );
     }
