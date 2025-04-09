@@ -28,10 +28,26 @@
     .walker-primary {
         @apply text-green-600;
     }
+
     .lng-selected {
         @apply border border-green-400;
     }
-        #map-canvas {
-            height: 600px;
-        }
+
+    #map-canvas {
+        height: 600px;
+    }
+
+    .google-maps {
+        position: relative;
+
+        height: 100%;
+    }
+
+    .google-maps iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+    }
 }
