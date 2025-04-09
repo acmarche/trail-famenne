@@ -3,7 +3,6 @@
 namespace App\Mail;
 
 use App\Filament\FrontPanel\Resources\WalkerResource;
-use App\Invoice\Facades\Invoice;
 use App\Models\Walker;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -13,9 +12,6 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-/**
- * https://maizzle.com/docs/components // todo
- */
 class InvoicePaid extends Mailable
 {
     use Queueable, SerializesModels;
@@ -49,7 +45,7 @@ class InvoicePaid extends Mailable
         }
 
         return new Content(
-            markdown: 'mail.invoice-paid',
+            markdown: 'emails.invoice',
             with: [
                 'textbtn' => __('invoices::messages.email.registration.confirm.btn.label'),
                 'url' => WalkerResource::getUrl('complete', ['record' => $this->walker], panel: 'front'),
@@ -65,21 +61,6 @@ class InvoicePaid extends Mailable
             Attachment::fromPath($this->logo)
                 ->as('logoMarcheur.jpg')
                 ->withMime('image/jpg');
-
-        $invoicePath = Invoice::make()
-            ->walker($this->walker)
-            ->invoicePath();
-
-        $invoiceFileName = Invoice::make()
-            ->walker($this->walker)
-            ->invoiceFileName();
-
-        if (is_file($invoicePath)) {
-            $attachments[] =
-                Attachment::fromStorageDisk('invoices', $invoiceFileName)
-                    ->as($invoiceFileName)
-                    ->withMime('application/pdf');
-        }
 
         return $attachments;
     }

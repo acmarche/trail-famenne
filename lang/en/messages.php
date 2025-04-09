@@ -81,7 +81,9 @@ return [
     'invoice.date' => 'Date',
     'email.invoice.paid.subject' => 'Registration 100 km - Invoice',
     'email.invoice.paid.body' => 'Your invoice is paid',
-    'NONE' => 'None',
+    'NONE' => 'Non',
+    'WOMAN' => 'Woman',
+    'MAN' => 'Man',
     'regulation.label' => 'Consult the regulations',
     'documentation'=>'Documentation',
 ];

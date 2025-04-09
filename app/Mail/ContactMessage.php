@@ -9,9 +9,6 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-/**
- * https://maizzle.com/docs/components // todo
- */
 class ContactMessage extends Mailable
 {
     use Queueable, SerializesModels;
@@ -42,7 +39,7 @@ class ContactMessage extends Mailable
         }
 
         return new Content(
-            markdown: 'mail.contact',
+            markdown: 'emails.contact',
             with: [
                 'content' => $this->content,
                 'url' => url('/'),

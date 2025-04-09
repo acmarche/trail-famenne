@@ -86,7 +86,12 @@ trait PdfHelper
 
         $view = View::make(
             $template,
-            ['invoice' => $this, 'qrCode' => $qrCodeFile, 'qrCodeScanning' => $qrCodeScanning],
+            [
+                'invoice' => $this,
+                'isPaid' => $this->walker->isPaid(),
+                'qrCode' => $qrCodeFile,
+                'qrCodeScanning' => $qrCodeScanning,
+            ],
         );
 
         //$html = mb_convert_encoding($view->render(), 'HTML-ENTITIES', 'UTF-8');

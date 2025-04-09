@@ -15,9 +15,6 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Carbon;
 
-/**
- * https://maizzle.com/docs/components // todo
- */
 class RegistrationCompleted extends Mailable
 {
     use Queueable, SerializesModels;

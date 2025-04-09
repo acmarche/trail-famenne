@@ -26,29 +26,9 @@ bodyClass: bg-slate-50
           <table class="w-full">
             <tr>
               <td class="py-6 px-9 sm:p-6 bg-white [border:1px_solid_theme(colors.slate.200)] rounded-lg">
-                <p class="m-0 mb-6 text-base text-slate-600">
-                  We're happy to have you on board! @{{$walker->first_name}} @{{$walker->last_name}}
-                </p>
-
-                <x-spacer height="24px"/>
-
-                <x-alert-danger>
-                  @{{__('invoices::messages.form.registration.notification.finish.body')}}
-                </x-alert-danger>
-
-                <x-payment walker="@{{$walker}}" bankAccount="@{{$bankAccount}}">
-
-                </x-payment>
-
-                <img src="@{{$message->embed($qrCode)}}" alt="qrcode" height="150">
-
-                <x-button
-                  href="@{{ $url }}"
-                  class="bg-slate-950 hover:bg-slate-800">
-                  @{{$textbtn}}
-                </x-button>
-
-                <x-spacer height="24px"/>
+                <div class="m-0 mb-6 text-base text-slate-600">
+                  @{{$content}}
+                </div>
 
                 <p class="m-0 text-base/6 text-slate-600">
                   Thanks,

@@ -21,11 +21,14 @@
       }
     }
     @media (prefers-color-scheme: dark) {
+      .dark-border-green-800 {
+        border-color: #166534 !important
+      }
       .dark-bg-gray-800 {
         background-color: #1f2937 !important
       }
-      .dark-text-red-400 {
-        color: #f87171 !important
+      .dark-text-green-400 {
+        color: #4ade80 !important
       }
     }
   </style>
@@ -53,39 +56,18 @@
             <tr>
               <td class="sm-p-6" style="border-radius: 8px; background-color: #fffffe; padding: 24px 36px; border: 1px solid #e2e8f0">
                 <p style="margin: 0 0 24px; font-size: 16px; color: #475569">
-                  We're happy to have you on board! {{$walker->first_name}} {{$walker->last_name}}
+                  Thanks for your paid {{$walker->first_name}} {{$walker->last_name}}
                 </p>
                 <div role="separator" style="line-height: 24px">&zwj;</div>
-                <div class="dark-bg-gray-800 dark-text-red-400" role="alert" style="margin-bottom: 16px; display: flex; align-items: center; border-radius: 8px; background-color: #fef2f2; padding: 16px; font-size: 14px; color: #991b1b">
+                <div class="dark-bg-gray-800 dark-text-green-400 dark-border-green-800" role="alert" style="margin-bottom: 16px; display: flex; align-items: center; border-radius: 8px; border-width: 1px; border-color: #86efac; background-color: #f0fdf4; padding: 16px; font-size: 14px; color: #166534">
                   <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" style="margin-inline-end: 12px; display: inline; height: 16px; width: 16px; flex-shrink: 0">
                     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"></path>
                   </svg>
-                  <span style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0">Info</span>
+                  <span style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0">Information</span>
                   <div>
-                    <span style="font-weight: 500"> {{__('invoices::messages.form.registration.notification.finish.body')}} </span>
+                    <span style="font-weight: 500"> {{__('invoices::messages.email.invoice.paid.body')}} </span>
                   </div>
                 </div>
-                <div role="separator" style="line-height: 24px">&zwj;</div>
-                {{__('invoices::messages.invoice.payment.title')}}
-                <div role="separator" style="line-height: 24px">&zwj;</div>
-                <table style="margin-top: 4px; margin-bottom: 4px; text-align: left" cellpadding="0" cellspacing="0" role="none">
-                  <tr>
-                    <th>{{__('invoices::messages.invoice.payment.for.label')}}</th>
-                    <td>{{$walker->first_name}} {{$walker->last_name}}</td>
-                  </tr>
-                  <tr>
-                    <th>{{__('invoices::messages.invoice.payment.iban.label')}}</th>
-                    <td>{{$bankAccount}}</td>
-                  </tr>
-                  <tr>
-                    <th>{{__('invoices::messages.invoice.payment.communication.label')}}</th>
-                    <td>{{$walker->communication()}}</td>
-                  </tr>
-                  <tr>
-                    <th>{{__('invoices::messages.invoice.payment.total_amount.label')}}</th>
-                    <td>{{$walker->amountInWords()}}</td>
-                  </tr>
-                </table> <img src="{{$message->embed($qrCode)}}" alt="qrcode" height="150" style="max-width: 100%; vertical-align: middle">
                 <div>
                   <a href="{{ $url }}" style="display: inline-block; text-decoration: none; padding: 16px 24px; font-size: 16px; line-height: 1; border-radius: 4px; color: #fffffe; background-color: #020617" class="hover-bg-slate-800">
                     <!--[if mso]><i style="mso-font-width: 150%; mso-text-raise: 31px" hidden>&emsp;</i><![endif]-->

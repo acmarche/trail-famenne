@@ -18,9 +18,12 @@ use Filament\Tables\Filters\Filter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Features\SupportRedirects\HandlesRedirects;
 
 class WalkerResource extends Resource
 {
+    use HandlesRedirects;
+
     protected static ?string $model = Walker::class;
 
     protected static ?string $navigationIcon = 'tabler-walk';
@@ -63,6 +66,9 @@ class WalkerResource extends Resource
                 Tables\Columns\TextColumn::make('is_paid')
                     ->label('Payé')
                     ->state(fn(Walker $walker) => $walker->isPaid() ? 'Oui' : 'Non'),
+                Tables\Columns\TextColumn::make('registration_id')
+                    ->label('Numéro d\'inscription')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('registration_date')
                     ->label('Date d\'inscription')
                     ->dateTime()
@@ -85,6 +91,7 @@ class WalkerResource extends Resource
                             ->success()
                             ->send();
                         RegistrationProcessed::dispatch($record);
+
                     })
                     ->label(fn(Walker $record): string => $record->isPaid() ? 'Payé' : 'Payer')
                     ->tooltip(fn(Walker $record): string => $record->isPaid() ? '' : 'Payer')

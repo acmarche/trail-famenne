@@ -48,12 +48,13 @@ class ViewWalker extends ViewRecord
                                     ->label('Coordonnées')
                                     ->schema([
                                         Infolists\Components\TextEntry::make('email')
+                                            ->inlineLabel(false)
                                             ->icon('heroicon-m-envelope'),
+                                        Infolists\Components\TextEntry::make('city')
+                                            ->label('Localité'),
                                         Infolists\Components\TextEntry::make('phone')
                                             ->label('Téléphone')
                                             ->icon('heroicon-m-phone'),
-                                        Infolists\Components\TextEntry::make('city')
-                                            ->label('Localité'),
                                         Infolists\Components\TextEntry::make('date_of_birth')
                                             ->label('Né le')
                                             ->dateTime(),

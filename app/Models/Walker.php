@@ -31,6 +31,7 @@ class Walker extends Model
         'club_name',
         'display_name',
         'gdpr_accepted',
+        'payment_date',
         'registration_date',
     ];
 
@@ -39,6 +40,7 @@ class Walker extends Model
         return [
             'tshirt_size' => TshirtEnum::class,
             'tshirt_sex' => SexEnum::class,
+            'payment_date' => 'datetime',
         ];
     }
 
@@ -81,7 +83,7 @@ class Walker extends Model
 
     public function amount(): float
     {
-        if (!is_null($this->date_payment) && Carbon::parse($this->date_payment)->lt(Carbon::create(2025, 8, 1))) {
+        if (!is_null($this->payment_date) && Carbon::parse($this->payment_date)->lt(Carbon::create(2025, 8, 1))) {
             return 45;
         }
 
@@ -90,7 +92,7 @@ class Walker extends Model
 
     public function isPaid(): bool
     {
-        return $this->payement_date !== null;
+        return $this->payment_date !== null;
     }
 
     public function amountInWords(): string

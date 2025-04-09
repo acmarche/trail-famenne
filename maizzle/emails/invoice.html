@@ -27,20 +27,14 @@ bodyClass: bg-slate-50
             <tr>
               <td class="py-6 px-9 sm:p-6 bg-white [border:1px_solid_theme(colors.slate.200)] rounded-lg">
                 <p class="m-0 mb-6 text-base text-slate-600">
-                  We're happy to have you on board! @{{$walker->first_name}} @{{$walker->last_name}}
+                 Thanks for your paid @{{$walker->first_name}} @{{$walker->last_name}}
                 </p>
 
                 <x-spacer height="24px"/>
 
-                <x-alert-danger>
-                  @{{__('invoices::messages.form.registration.notification.finish.body')}}
-                </x-alert-danger>
-
-                <x-payment walker="@{{$walker}}" bankAccount="@{{$bankAccount}}">
-
-                </x-payment>
-
-                <img src="@{{$message->embed($qrCode)}}" alt="qrcode" height="150">
+                <x-alert-success>
+                  @{{__('invoices::messages.email.invoice.paid.body')}}
+                </x-alert-success>
 
                 <x-button
                   href="@{{ $url }}"
