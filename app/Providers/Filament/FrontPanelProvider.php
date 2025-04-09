@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\FrontPanel\Resources\Pages\InformationPage;
+use App\Filament\FrontPanel\Resources\Pages\MapPage;
 use App\Filament\FrontPanel\Resources\Pages\RgpdPage;
 use App\Filament\FrontPanel\Resources\Pages\WalkersPage;
 use App\Http\Middleware\SetLocaleLanguage;
@@ -64,6 +65,7 @@ class FrontPanelProvider extends PanelProvider
             )
             ->pages([
                 InformationPage::class,
+                MapPage::class,
                 WalkersPage::class,
                 RgpdPage::class,
             ])

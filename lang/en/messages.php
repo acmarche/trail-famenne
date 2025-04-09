@@ -5,6 +5,8 @@ return [
     'page.information.title' => 'Informations',
     'page.walkers.title' => 'Participants',
     'page.rgpd.title' => 'General Data Protection Regulation',
+    'page.maps.title' => 'Maps',
+    'page.maps.label' => 'Maps',
     'page.rgpd.label' => 'GDPR',
     'registration.navigation.label' => 'New registration',
     'registration.navigation.plural.model.label' => 'Registrations',
