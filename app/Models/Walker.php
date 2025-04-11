@@ -29,8 +29,10 @@ class Walker extends Model
         'phone',
         'tshirt_size',
         'club_name',
-        'display_name',
+        'display_accepted',
+        'newsletter_accepted',
         'gdpr_accepted',
+        'regulation_accepted',
         'payment_date',
         'registration_date',
     ];
