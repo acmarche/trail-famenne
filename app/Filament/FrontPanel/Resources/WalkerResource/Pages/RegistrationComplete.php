@@ -52,12 +52,12 @@ class RegistrationComplete extends Page
         $this->registrationEndDate = Carbon::parse(config('invoices.TRAIL_TSHIRT_ENDDATE'))->translatedFormat('j F Y');
 
         $walker = $this->record;
-        try {
+/*        try {
             Mail::to(new Address($walker->email, $walker->email))
                 ->send(new RegistrationCompleted($walker));
         } catch (\Exception $e) {
             dd($e->getMessage());
-        }
+        }*/
 
     }
 
