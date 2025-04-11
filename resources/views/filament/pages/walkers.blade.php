@@ -4,6 +4,6 @@
             <img src="{{asset('images/logoMarcheur.jpg')}}" alt="logo marcheur" class="w-56 ml-8">
             <h1 class="text-3xl font-bold walker-primary text-center">{{__('invoices::messages.page.walkers.title')}}</h1>
         </div>
-        {{$this->table}}
+        <p>Bientôt...</p>
     </div>
 </x-filament-panels::page>
