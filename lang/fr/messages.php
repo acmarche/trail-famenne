@@ -56,7 +56,7 @@ return [
     'club_name' => 'Nom de votre club',
     'address' => 'Adresse',
     'street' => 'Rue',
-    'display_name' => 'Afficher mon nom sur la liste des participants',
+    'display_name' => 'J\'autorise que que mon nom soit affiché dans la liste des participants',
     'date_of_birth.label' => 'Date de naissance',
     'date_of_birth.help' => 'Pour les assurances',
     'invoice.paid' => 'Facture',

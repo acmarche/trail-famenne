@@ -16,8 +16,8 @@
         "endroid/qr-code": "^6.0",
         "filament/filament": "^3.2",
         "khanamiryan/qrcode-detector-decoder": "^2.0",
-        "laravel/framework": "^11.31",
-        "laravel/tinker": "^2.9",
+        "laravel/framework": "^v12.8.1",
+        "laravel/tinker": "^v2.10.1",
         "secondnetwork/blade-tabler-icons": "^3.30",
         "sibyx/phpgpx": "^1.3"
     },

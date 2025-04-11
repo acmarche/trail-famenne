@@ -11,7 +11,7 @@ class RgpdPage extends Page
     protected static string $view = 'filament.pages.rgpd';
     protected static ?string $navigationGroup = 'Informations';
 
-    public array $log=['reason'=>'super'];
+    protected static bool $shouldRegisterNavigation = false;
 
     public function getLayout(): string
     {

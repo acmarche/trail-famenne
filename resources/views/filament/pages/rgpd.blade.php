@@ -7,6 +7,9 @@
             </h1>
         </div>
 
+        <p>
+            <a href="https://www.marche.be/administration/rgpd/">Vous pouvez consulter nos mentions légales et RGPD</a>
+        </p>
 
     </div>
 </x-filament-panels::page>

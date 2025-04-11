@@ -55,7 +55,7 @@ return [
     'club_name' => 'Your club name',
     'address' => 'Address',
     'street' => 'Street',
-    'display_name' => 'Display my name on website',
+    'display_name' => 'I authorize my name to be displayed in the list of participants',
     'date_of_birth.label' => 'Date of birth',
     'date_of_birth.help' => 'For insurance',
     'invoice.paid' => 'Invoice',
