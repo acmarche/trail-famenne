@@ -28,6 +28,7 @@ class Walker extends Model
         'date_of_birth',
         'phone',
         'tshirt_size',
+        'tshirt_sex',
         'club_name',
         'display_accepted',
         'newsletter_accepted',
