@@ -53,7 +53,7 @@ class RegistrationCompleted extends Mailable
             ->id($this->walker->id)
             ->qrCodePath();
 
-        $this->bankAccount = config('seller.bank_account');
+        $this->bankAccount = config('invoices.seller.bank_account');
         $this->registrationEndDate = Carbon::parse(config('invoices.TRAIL_TSHIRT_ENDDATE'))->translatedFormat('j F Y');
 
         return new Content(
