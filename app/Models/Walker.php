@@ -83,7 +83,8 @@ class Walker extends Model
 
     public function amount(): float
     {
-        if (!is_null($this->payment_date) && Carbon::parse($this->payment_date)->lt(Carbon::create(2025, 8, 1))) {
+        $today = Carbon::today();
+        if ($today < Carbon::create(2025, 8, 1)) {
             return 45;
         }
 
