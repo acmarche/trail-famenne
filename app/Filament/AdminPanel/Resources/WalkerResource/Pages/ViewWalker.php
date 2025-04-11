@@ -57,7 +57,7 @@ class ViewWalker extends ViewRecord
                                             ->icon('heroicon-m-phone'),
                                         Infolists\Components\TextEntry::make('date_of_birth')
                                             ->label('Né le')
-                                            ->dateTime(),
+                                            ->date('d-m-Y'),
                                     ]),
                             ]),
                             Section::make([
@@ -92,9 +92,14 @@ class ViewWalker extends ViewRecord
                             ->label('Rgpd')
                             ->schema([
                                 Infolists\Components\TextEntry::make('newsletter_accepted')
-                                    ->label('Lettre d\'information'),
+                                    ->label('Lettre d\'information')
+                                    ->state(fn(Walker $walker) => $walker->newsletter_accepted ? 'Oui' : 'NON'),
                                 Infolists\Components\TextEntry::make('regulation_accepted')
-                                    ->label('Accepte le règlement'),
+                                    ->label('Accepte le règlement')
+                                    ->state(fn(Walker $walker) => $walker->regulation_accepted ? 'Oui' : 'NON'),
+                                Infolists\Components\TextEntry::make('display_accepted')
+                                    ->label('Afficher mon nom sur le site')
+                                    ->state(fn(Walker $walker) => $walker->display_accepted ? 'Oui' : 'NON'),
                             ]),
                     ]),
             ]);
