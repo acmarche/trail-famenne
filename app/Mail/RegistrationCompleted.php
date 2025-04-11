@@ -63,7 +63,7 @@ class RegistrationCompleted extends Mailable
                 'url' => WalkerResource::getUrl('complete', ['record' => $this->walker], panel: 'front'),
                 'logo' => $this->logo,
                 'qrCode' => $this->qrcode,
-                'banckAccount' => $this->bankAccount,
+                'bankAccount' => $this->bankAccount,
                 'registrationEndDate' => $this->registrationEndDate,
             ],
         );
