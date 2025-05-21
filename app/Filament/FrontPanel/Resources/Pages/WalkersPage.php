@@ -48,10 +48,10 @@ class WalkersPage extends Page implements HasTable
             ->columns([
                 TextColumn::make('last_name')
                     ->label(__('invoices::messages.last_name'))
-                    ->state(fn(Walker $walker) => $walker->display_accepted  ? $walker->last_name : 'Anonyme'),
+                    ->state(fn(Walker $walker) => $walker->display_accepted  ? $walker->last_name : __('anonymous')),
                 TextColumn::make('first_name')
                     ->label(__('invoices::messages.first_name'))
-                    ->state(fn(Walker $walker) => $walker->display_accepted  ? $walker->first_name : 'Anonyme'),
+                    ->state(fn(Walker $walker) => $walker->display_accepted  ? $walker->first_name : __('anonymous')),
                 TextColumn::make('city')
                     ->label(__('invoices::messages.city')),
             ])

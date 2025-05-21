@@ -88,5 +88,6 @@ return [
     'MAN' => 'Man',
     'regulation.label' => 'Bekijk het reglement',
     'documentation' => 'Reglement',
+    'anonymous'=>'Anoniem'
 ];
 

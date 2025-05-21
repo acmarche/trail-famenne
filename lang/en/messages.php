@@ -88,4 +88,5 @@ return [
     'MAN' => 'Man',
     'regulation.label' => 'Consult the regulations',
     'documentation'=>'Documentation',
+    'anonymous'=>'Anonymous'
 ];
