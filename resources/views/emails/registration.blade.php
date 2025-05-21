@@ -52,9 +52,14 @@
           <table style="width: 100%" cellpadding="0" cellspacing="0" role="none">
             <tr>
               <td class="sm-p-6" style="border-radius: 8px; background-color: #fffffe; padding: 24px 36px; border: 1px solid #e2e8f0">
-                <p style="margin: 0 0 24px; font-size: 16px; color: #475569">
-                  We're happy to have you on board! {{$walker->first_name}} {{$walker->last_name}}
-                </p>
+                <div style="margin: 0 0 24px; font-size: 16px; color: #475569">
+                    We're happy to have you on board!<br>
+                    Nous sommes heureux de vous compter parmi nous !<br>
+                    Wij zijn blij dat u erbij bent!<br>
+                    Schön, dass du dabei bist!<br><br>
+
+                    {{$walker->first_name}} {{$walker->last_name}}
+                </div>
                 <div role="separator" style="line-height: 24px">&zwj;</div>
                 <div class="dark-bg-gray-800 dark-text-red-400" role="alert" style="margin-bottom: 16px; display: flex; align-items: center; border-radius: 8px; background-color: #fef2f2; padding: 16px; font-size: 14px; color: #991b1b">
                   <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20" style="margin-inline-end: 12px; display: inline; height: 16px; width: 16px; flex-shrink: 0">
