@@ -7,9 +7,8 @@
         </div>
 
         <x-alert type="success">
-            <p>Cliquez sur l'icône à gauche de  Marche Famenne-Ardenne pour choisir votre parcours</p>
+            <p>Cliquez sur l'icône à gauche de "Parcours Marche Famenne-Ardenne" pour choisir votre parcours</p>
         </x-alert>
-
 
         <div class="google-maps mt-5">
 

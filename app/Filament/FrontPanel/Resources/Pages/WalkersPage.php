@@ -21,10 +21,12 @@ class WalkersPage extends Page implements HasTable
     //protected ?string $subheading = 'Custom Page Subheading';
 
     public string $locale = '';
+    public int $count = 0;
 
     public function __construct()
     {
         $this->localeLanguage();
+        $this->count = Walker::query()->whereNotNull('payment_date')->count();
     }
 
     public function localeLanguage(): void
@@ -40,12 +42,18 @@ class WalkersPage extends Page implements HasTable
     public function table(Table $table): Table
     {
         return $table
-            ->query(Walker::query()->whereNotNull('payment_date'))
+            ->defaultPaginationPageOption(50)
+            ->defaultSort('last_name')
+            ->query(Walker::query()->whereNotNull('payment_date')->orderBy('last_name'))
             ->columns([
-                TextColumn::make('first_name')
-                    ->label(__('invoices::messages.first_name')),
                 TextColumn::make('last_name')
-                    ->label(__('invoices::messages.last_name')),
+                    ->label(__('invoices::messages.last_name'))
+                    ->state(fn(Walker $walker) => $walker->display_accepted  ? $walker->first_name : 'Anonyme'),
+                TextColumn::make('first_name')
+                    ->label(__('invoices::messages.first_name'))
+                    ->state(fn(Walker $walker) => $walker->display_accepted  ? $walker->first_name : 'Anonyme'),
+                TextColumn::make('city')
+                    ->label(__('invoices::messages.city')),
             ])
             ->filters([
                 // ...

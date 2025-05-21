@@ -44,6 +44,10 @@ class Walker extends Model
             'tshirt_size' => TshirtEnum::class,
             'tshirt_sex' => SexEnum::class,
             'payment_date' => 'datetime',
+            'display_accepted'=>'bool',
+            'newsletter_accepted'=>'bool',
+            'gdpr_accepted'=>'bool',
+            'regulation_accepted'=>'bool'
         ];
     }
 
