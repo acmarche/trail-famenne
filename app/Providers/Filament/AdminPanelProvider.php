@@ -40,6 +40,7 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Amber,
             ])
             ->favicon(asset('/favicon/favicon.svg'))
+            ->databaseNotifications()
             ->discoverResources(
                 in: app_path('Filament/AdminPanel/Resources'),
                 for: 'App\\Filament\\AdminPanel\\Resources',
