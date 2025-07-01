@@ -18,6 +18,7 @@
         "khanamiryan/qrcode-detector-decoder": "^2.0",
         "laravel/framework": "^v12.8.1",
         "laravel/tinker": "^v2.10.1",
+        "maatwebsite/excel": "^3.1",
         "secondnetwork/blade-tabler-icons": "^3.30",
         "sibyx/phpgpx": "^1.3"
     },
