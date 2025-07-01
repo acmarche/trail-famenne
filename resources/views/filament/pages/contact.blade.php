@@ -10,7 +10,7 @@
             </x-filament::section.heading>
 
             <x-filament::section.description>
-                 Un mail sera envoyé à tous les marcheurs dont l'inscription a été payée.
+
             </x-filament::section.description>
         </x-filament::section>
 

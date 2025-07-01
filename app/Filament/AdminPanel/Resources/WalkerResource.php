@@ -115,9 +115,6 @@ class WalkerResource extends Resource
                     )
                     ->modalHeading('Payer la facture')
                     ->modalDescription('Confirmer que la facture a été payée.'),
-                Tables\Actions\ViewAction::make()
-                    ->label('Visualiser')
-                    ->icon('tabler-eye'),
                 InvoiceDownloadAction::make(),
             ])
             ->bulkActions([

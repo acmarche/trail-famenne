@@ -23,6 +23,7 @@ class Message extends Page implements HasForms
     protected static ?string $navigationGroup = 'Administration';
     protected static ?string $navigationIcon = 'tabler-message';
     protected static string $view = 'filament.pages.contact';
+    public array $formData = [];
 
     public function form(Form $form): Form
     {
@@ -37,12 +38,16 @@ class Message extends Page implements HasForms
                     ->required()
                     ->rows(7)
                     ->minLength(50),
+                Forms\Components\Checkbox::make('everyone')
+                    ->label('Envoyer à tous les participants')
+                    ->helperText('En cochant la case, ceux qui n\'ont pas encore payé recevront aussi le mail'),
                 Forms\Components\Actions::make([
                     Action::make('send')
                         ->label('Envoyer')
                         ->requiresConfirmation()
-                        ->action(function (array $data) {
-                            $this->sendMessage($data['subject'], $data['content']);
+                        ->action(function () {
+                            $data = $this->formData;
+                            $this->sendMessage($data['subject'], $data['content'], $data['everyone']);
                             Notification::make()
                                 ->title('Message envoyé')
                                 ->success()
@@ -50,7 +55,8 @@ class Message extends Page implements HasForms
                         })
                         ->successRedirectUrl($this::getUrl()),
                 ]),
-            ]);
+            ])
+            ->statePath('formData');
     }
 
     public function getLayout(): string
@@ -65,11 +71,16 @@ class Message extends Page implements HasForms
         return $isAdmin ?? false;
     }
 
-    private function sendMessage(string $subject, string $message): void
+    private function sendMessage(string $subject, string $message, bool $everyone): void
     {
-        $emails = Walker::whereNotNull('payment_date')
-            ->distinct()
-            ->pluck('email');
+        if ($everyone) {
+            $emails = Walker::query()->get()
+                ->pluck('email');
+        } else {
+            $emails = Walker::whereNotNull('payment_date')
+                ->distinct()
+                ->pluck('email');
+        }
         foreach ($emails as $email) {
             try {
                 Mail::to(new Address('jf@marche.be', $email))
@@ -78,7 +89,11 @@ class Message extends Page implements HasForms
                             ->subject($subject)
                     );
             } catch (\Exception $e) {
-                dd($e->getMessage());
+                Notification::make()
+                    ->title('Message non envoyé')
+                    ->body('Pour le mail '.$email)
+                    ->danger()
+                    ->send();
             }
         }
     }

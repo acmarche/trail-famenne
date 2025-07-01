@@ -3,10 +3,11 @@
 namespace App\Filament\AdminPanel\Resources\WalkerResource\Pages;
 
 use App\Filament\AdminPanel\Resources\WalkerResource;
+use App\Filament\Exports\WalkerExporter;
 use App\Models\Walker;
 use Filament\Actions;
-use Filament\Resources\Pages\ListRecords;
 use Filament\Resources\Components\Tab;
+use Filament\Resources\Pages\ListRecords;
 use Illuminate\Database\Eloquent\Builder;
 
 class ListWalkers extends ListRecords
@@ -27,7 +28,13 @@ class ListWalkers extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->label('Ajouter un marcher')
+                ->icon('tabler-plus'),
+            Actions\ExportAction::make()
+                ->label('Exporter la liste')
+                ->icon('tabler-file-type-xls')
+                ->exporter(WalkerExporter::class),
         ];
     }
 
