@@ -52,6 +52,7 @@ class Message extends Page implements HasForms
                                 ->title('Message envoyé')
                                 ->success()
                                 ->send();
+                            $this->formData = [];
                         })
                         ->successRedirectUrl($this::getUrl()),
                 ]),
