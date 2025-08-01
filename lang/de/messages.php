@@ -46,7 +46,7 @@ return [
     'tshirt_size' => 'T-Shirt-Größe',
     'tshirt_size.label' => 'T-Shirt-Größe',
     'tshirt_sex.label' => 'T-Shirt-Schnitt',
-    'tshirt_size.help' => 'Ein T-Shirt wird bereitgestellt, wenn die Zahlung vor dem 1. August eingeht',
+    'tshirt_size.help' => 'Ein T-Shirt wird bereitgestellt, wenn die Zahlung vor dem 4. August eingeht',
     'tshirt_sex.help' => '',
     'city' => 'Ort',
     'email' => 'E-Mail',

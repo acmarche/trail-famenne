@@ -54,9 +54,9 @@
         </p>
 
         <h3 class="text-2xl font-semibold walker-secondary mt-6">ANMELDUNG</h3>
-        <p>Wenn Sie <span class="font-semibold">vor</span> dem 1. August bezahlen 2025 : <span class="font-semibold">45 € mit T-shirt</span>
+        <p>Wenn Sie <span class="font-semibold">vor</span> dem 4. August bezahlen 2025 : <span class="font-semibold">45 € mit T-shirt</span>
         </p>
-        <p>Wenn Sie <span class="font-semibold">nach</span> vor dem 1. August 2025 : <span class="font-semibold">50 € ohne T-shirt</span>
+        <p>Wenn Sie <span class="font-semibold">nach</span> vor dem 4. August 2025 : <span class="font-semibold">50 € ohne T-shirt</span>
         </p>
         <p class="mt-2">Dieser Preis beinhaltet: T-Shirt, Frühstück auf halber Strecke und Verpflegung.</p>
 

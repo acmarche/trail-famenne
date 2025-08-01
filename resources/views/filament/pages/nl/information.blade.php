@@ -51,8 +51,8 @@
         </p>
 
         <h3 class="text-2xl font-semibold walker-secondary mt-6">INSCHRIJVING</h3>
-        <p>Als u <span class="font-semibold">vóór</span> 1 augustus betaalt : <span class="font-semibold">45 € met t-shirt</span></p>
-        <p>Als u <span class="font-semibold">na</span> 1 augustus betaalt : <span class="font-semibold">50 € zonder t-shirt</span></p>
+        <p>Als u <span class="font-semibold">vóór</span> 4 augustus betaalt : <span class="font-semibold">45 € met t-shirt</span></p>
+        <p>Als u <span class="font-semibold">na</span> 4 augustus betaalt : <span class="font-semibold">50 € zonder t-shirt</span></p>
         <p class="mt-2">In de prijs inbegrepen : t-shirt, ontbijt halverwege en bevoorrading.</p>
 
         <h3 class="text-2xl font-semibold walker-secondary mt-6">BELANGRIJK</h3>

@@ -54,9 +54,9 @@
         </p>
 
         <h3 class="text-2xl font-semibold walker-secondary mt-6">REGISTRATION</h3>
-        <p>If you pay <span class="font-semibold">before</span> August 1st : <span class="font-semibold">45 € with T-shirt</span>
+        <p>If you pay <span class="font-semibold">before</span> August 4 : <span class="font-semibold">45 € with T-shirt</span>
         </p>
-        <p>If you pay <span class="font-semibold">after</span> August 1st : <span class="font-semibold">50 € without T-shirt</span>
+        <p>If you pay <span class="font-semibold">after</span> August 4 : <span class="font-semibold">50 € without T-shirt</span>
         </p>
         <p class="mt-2">This price includes: t-shirt, mid-course breakfast and refreshments.</p>
 

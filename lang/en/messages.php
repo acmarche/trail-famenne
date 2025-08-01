@@ -46,7 +46,7 @@ return [
     'tshirt.label' => 'T-shirt',
     'tshirt_size.label' => ',T-shirt size',
     'tshirt_sex.label' => 'T-shirt cutout',
-    'tshirt_size.help' => 'A t-shirt will be provided to you if you pay before August 1st',
+    'tshirt_size.help' => 'A t-shirt will be provided to you if you pay before August 4st',
     'tshirt_sex.help' => '',
     'city' => 'City',
     'email' => 'Email',

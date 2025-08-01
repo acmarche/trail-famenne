@@ -47,7 +47,7 @@ return [
     'tshirt_size' => 'Taille du t-shirt',
     'tshirt_size.label' => 'Taille du t-shirt',
     'tshirt_sex.label' => 'Découpe du T-shirt',
-    'tshirt_size.help' => 'Un t-shirt vous sera fourni si vous payez avant le 1er août',
+    'tshirt_size.help' => 'Un t-shirt vous sera fourni si vous payez avant le 4 août',
     'tshirt_sex.help' => '',
     'city' => 'Localité',
     'email' => 'Courriel',

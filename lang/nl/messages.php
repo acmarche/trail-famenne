@@ -46,7 +46,7 @@ return [
     'tshirt_size' => 'T-shirtmaat',
     'tshirt_size.label' => 'T-shirtmaat',
     'tshirt_sex.label' => 'Snit van de T-shirt',
-    'tshirt_size.help' => 'U ontvangt een t-shirt als u betaalt vóór 1 augustus',
+    'tshirt_size.help' => 'U ontvangt een t-shirt als u betaalt vóór 4 augustus',
     'tshirt_sex.help' => '',
     'city' => 'Woonplaats',
     'email' => 'E-mailadres',

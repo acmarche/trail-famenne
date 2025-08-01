@@ -51,10 +51,10 @@
         </p>
 
         <h3 class="text-2xl font-semibold walker-secondary mt-6">INSCRIPTION</h3>
-        <p>Si vous payer <span class="font-semibold">avant</span> le 1 août 2025 :
+        <p>Si vous payer <span class="font-semibold">avant</span> le 4 août 2025 :
             <span class="font-semibold">45 € avec T-shirt</span>
         </p>
-        <p>Si vous payer <span class="font-semibold">après</span> le 1 août 2025 :
+        <p>Si vous payer <span class="font-semibold">après</span> le 4 août 2025 :
             <span class="font-semibold">50 € sans T-shirt</span>
         </p>
         <p class="mt-2">Ce prix comprend : tee-shirt, petit déjeuner à mi-parcours et ravitaillement.</p>
