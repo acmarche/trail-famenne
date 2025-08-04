@@ -18,20 +18,33 @@ class WalkersChartCountryWidget extends ChartWidget
             ->pluck('count', 'country')
             ->toArray();
 
+        $colors = $this->getColors($countryData);
+
         return [
             'datasets' => [
                 [
                     'label' => 'Country Distribution',
                     'data' => array_values($countryData),
-                    'backgroundColor' => [
-                        'rgb(255, 99, 132)',
-                        'rgb(54, 162, 235)',
-                    ],
+                    'backgroundColor' => $colors,
                     'borderColor' => '#9BD0F5',
                 ],
             ],
             'labels' => array_keys($countryData),
         ];
+    }
+
+    protected function getColors($countryData): array
+    {
+        $colors = [];
+        foreach ($countryData as $country) {
+            $r = rand(30, 230);
+            $g = rand(30, 230);
+            $b = rand(30, 230);
+
+            $colors[] = "rgb({$r}, {$g}, {$b})";
+        }
+
+        return $colors;
     }
 
     protected function getType(): string

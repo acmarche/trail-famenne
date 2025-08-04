@@ -39,7 +39,7 @@ class WalkersChartBirthdayWidget extends ChartWidget
                     'backgroundColor' => [
                         'rgb(255, 99, 132)',
                         'rgb(54, 162, 235)',
-                        'rgb(54, 162, 235)',
+                        'rgb(54, 40, 235)',
                         'rgb(162, 205, 86)'
                     ],
                     'borderColor' => '#9BD0F5',
