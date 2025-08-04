@@ -2,6 +2,7 @@
 
 namespace App\Filament\AdminPanel\Resources;
 
+use App\Constant\SexEnum;
 use App\Constant\TshirtEnum;
 use App\Events\RegistrationProcessed;
 use App\Filament\Actions\InvoiceDownloadAction;
@@ -74,12 +75,21 @@ class WalkerResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('payment_date')
+                    ->label('Date de paiement')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('city')
                     ->searchable(),
             ])
             ->filters([
                 Filter::make('is_paid')
                     ->query(fn(Builder $query) => $query->where('payment_date', 'IS NOT', null)),
+                Tables\Filters\SelectFilter::make('tshirt_size')
+                    ->options(TshirtEnum::class),
+                Tables\Filters\SelectFilter::make('tshirt_sex')
+                    ->options(SexEnum::class),
             ])
             ->actions([
                 Tables\Actions\Action::make('payment')
