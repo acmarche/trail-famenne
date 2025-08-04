@@ -52,6 +52,17 @@ class GenerateNumber extends Page implements HasTable, HasForms
                     ->label('Générer les numéros')
                     ->requiresConfirmation()
                     ->action(function () {
+
+                        if (Walker::query()->whereNotNull('tshirt_number')->count() > 0) {
+                            Notification::make()
+                                ->title('Les numéros ont déjà été générés')
+                                ->danger()
+                                ->send();
+                            $this->redirect(request()->header('referer'));
+
+                            return;
+                        }
+
                         $i = 1;
                         foreach (Walker::canHaveTshirts()->get() as $walker) {
                             $walker->tshirt_number = $i;
