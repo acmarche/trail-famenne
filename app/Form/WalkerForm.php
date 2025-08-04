@@ -36,8 +36,8 @@ class WalkerForm
                     ->schema(
                         self::fieldsGdpr(),
                     ),
-                Section::make(__('invoices::messages.form.registration.walkers.step3.label'))
-                      ->visible(fn() => auth()->user()?->hasRole(Role::ROLE_ADMIN))
+                Section::make('Payé?')
+                    ->visible(fn() => auth()->user()?->hasRole(Role::ROLE_ADMIN))
                     ->schema(
                         [
                             DatePicker::make('payment_date')
