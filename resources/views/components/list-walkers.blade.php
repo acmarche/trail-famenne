@@ -12,7 +12,7 @@
             {{ $walker->name() }}
         </td>
         <td class="text-center">
-            {{ $walker->tshirt_size->value }}
+            {{ $walker->tshirt_size?->value }}
         </td>
         <td class="text-right">
             {{ $walker->amountInWords() }}

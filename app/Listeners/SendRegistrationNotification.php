@@ -22,13 +22,17 @@ class SendRegistrationNotification
     public function handle(RegistrationProcessed $event): void
     {
         $walker = $event->walker();
-        $walker->registration_id = RegistrationUtils::lastRegistrationId() +1 ;
+        $walker->registration_id = RegistrationUtils::lastRegistrationId() + 1;
         $walker->save();
 
         try {
             Invoice::generateWithQrCode($walker);
         } catch (BindingResolutionException|\Exception $e) {
             dd($e->getMessage());
+        }
+
+        if (!$walker->email) {
+            return;
         }
 
         if ($walker->isPaid()) {

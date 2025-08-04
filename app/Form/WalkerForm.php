@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Constant\SexEnum;
 use App\Constant\TshirtEnum;
 use App\Filament\FrontPanel\Resources\Pages\InformationPage;
+use App\Models\Role;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Grid;
@@ -35,6 +36,17 @@ class WalkerForm
                     ->schema(
                         self::fieldsGdpr(),
                     ),
+                Section::make(__('invoices::messages.form.registration.walkers.step3.label'))
+                      ->visible(fn() => auth()->user()?->hasRole(Role::ROLE_ADMIN))
+                    ->schema(
+                        [
+                            DatePicker::make('payment_date')
+                                ->label('Date de paiment')
+                                ->default(now())
+                                ->visible(fn() => auth()->user()?->hasRole(Role::ROLE_ADMIN)),
+                        ]
+                    ),
+
             ]);
     }
 
@@ -65,25 +77,25 @@ class WalkerForm
                         ->suffixIcon('tabler-mail')
                         ->maxLength(150)
                         ->autocomplete('email')
-                        ->required(),
+                        ->required(fn() => !auth()->user()?->hasRole(Role::ROLE_ADMIN)),
                     TextInput::make('phone')
                         ->label(__('invoices::messages.phone'))
-                        ->required()
+                        ->required(fn() => !auth()->user()?->hasRole(Role::ROLE_ADMIN))
                         ->tel(),
                     Select::make('tshirt_size')
                         ->label(__('invoices::messages.tshirt_size.label'))
                         ->helperText(__('invoices::messages.tshirt_size.help'))
                         // ->default(TshirtEnum::NO->value)
-                        ->required()
                         ->options(TshirtEnum::class)
-                        ->suffixIcon('tabler-shirt-sport'),
+                        ->suffixIcon('tabler-shirt-sport')
+                        ->visible(fn() => auth()->user()?->hasRole(Role::ROLE_ADMIN)),
                     Select::make('tshirt_sex')
                         ->label(__('invoices::messages.tshirt_sex.label'))
                         ->helperText(__('invoices::messages.tshirt_sex.help'))
                         ->placeholder('')
-                        ->required()
                         ->options(SexEnum::class)
-                        ->suffixIcon('tabler-gender-hermaphrodite'),
+                        ->suffixIcon('tabler-gender-hermaphrodite')
+                        ->visible(fn() => auth()->user()?->hasRole(Role::ROLE_ADMIN)),
                 ]),
         ];
     }
@@ -104,7 +116,7 @@ class WalkerForm
                     DatePicker::make('date_of_birth')
                         ->label(__('invoices::messages.date_of_birth.label'))
                         ->helperText(__('invoices::messages.date_of_birth.help'))
-                        ->required()
+                        ->required(fn() => !auth()->user()?->hasRole(Role::ROLE_ADMIN))
                         ->maxDate(now())
                         ->date(),
                     TextInput::make('club_name')
@@ -130,10 +142,10 @@ class WalkerForm
                 ->label(__('invoices::messages.form.registration.actions.newsletter_accepted.label'))
                 ->required(false),
             Checkbox::make('gdpr_accepted')
-                ->required()
+                ->required(fn() => !auth()->user()?->hasRole(Role::ROLE_ADMIN))
                 ->label(__('invoices::messages.form.registration.actions.gdpr_accepted.label')),
             Checkbox::make('regulation_accepted')
-                ->required()
+                ->required(fn() => !auth()->user()?->hasRole(Role::ROLE_ADMIN))
                 ->label(__('invoices::messages.form.registration.actions.regulation_accepted.label')),
             Placeholder::make('documentation')
                 ->label(__('invoices::messages.documentation'))
