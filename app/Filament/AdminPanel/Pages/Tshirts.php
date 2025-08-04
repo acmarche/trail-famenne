@@ -11,9 +11,11 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Tshirts extends Page implements HasForms, HasTable
 {
@@ -24,6 +26,11 @@ class Tshirts extends Page implements HasForms, HasTable
     protected static ?string $navigationGroup = 'Administration';
     protected static ?string $navigationIcon = 'tabler-shirt-sport';
     protected static string $view = 'filament.pages.tshirts';
+
+    public function getSubheading(): string|Htmlable|null
+    {
+        return 'Seul les marcheurs ayant payé avant le '.Carbon::parse(config('invoices.TRAIL_TSHIRT_ENDDATE'))->format('d-m-Y').' sont pris en compte';
+    }
 
     /**
      * Necessary for group by
@@ -40,6 +47,7 @@ class Tshirts extends Page implements HasForms, HasTable
         return $table
             ->query(
                 Walker::query()
+                    ->where('payment_date', '<', Carbon::parse(config('invoices.TRAIL_TSHIRT_ENDDATE')))
                     ->selectRaw('tshirt_size,tshirt_sex, COUNT(*) as count')
                     ->groupBy('tshirt_size', 'tshirt_sex'),
             )

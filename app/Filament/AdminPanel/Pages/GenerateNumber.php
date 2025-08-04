@@ -4,6 +4,7 @@ namespace App\Filament\AdminPanel\Pages;
 
 use App\Models\Role;
 use App\Models\Walker;
+use App\Utils\RegistrationUtils;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Filament\Notifications\Notification;
@@ -13,6 +14,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
 
 class GenerateNumber extends Page implements HasTable, HasForms
@@ -20,10 +22,15 @@ class GenerateNumber extends Page implements HasTable, HasForms
     use InteractsWithTable;
     use InteractsWithForms;
 
-    protected static ?string $title = 'Numérotation des T-shirts';
+    protected static ?string $title = 'Numérotation des marcheurs';
     protected static ?string $navigationGroup = 'Administration';
     protected static ?string $navigationIcon = 'tabler-shirt-sport';
     protected static string $view = 'filament.pages.tshirts';
+
+    public function getSubheading(): string|Htmlable|null
+    {
+        return 'La numérotation se fait par ordre de date d\'inscription';
+    }
 
     /**
      * Necessary for group by
@@ -52,22 +59,9 @@ class GenerateNumber extends Page implements HasTable, HasForms
                     ->label('Générer les numéros')
                     ->requiresConfirmation()
                     ->action(function () {
-
-                        if (Walker::query()->whereNotNull('tshirt_number')->count() > 0) {
-                            Notification::make()
-                                ->title('Les numéros ont déjà été générés')
-                                ->danger()
-                                ->send();
-                            $this->redirect(request()->header('referer'));
-
-                            return;
-                        }
-
-                        $i = 1;
-                        foreach (Walker::canHaveTshirts()->get() as $walker) {
-                            $walker->tshirt_number = $i;
+                        foreach (Walker::withOutNumberTshirt()->get() as $walker) {
+                            RegistrationUtils::generateNumber($walker);
                             $walker->save();
-                            $i++;
                         }
                         Notification::make()
                             ->title('Numéros générés')

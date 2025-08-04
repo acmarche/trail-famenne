@@ -44,10 +44,10 @@ class Walker extends Model
             'tshirt_size' => TshirtEnum::class,
             'tshirt_sex' => SexEnum::class,
             'payment_date' => 'datetime',
-            'display_accepted'=>'bool',
-            'newsletter_accepted'=>'bool',
-            'gdpr_accepted'=>'bool',
-            'regulation_accepted'=>'bool'
+            'display_accepted' => 'bool',
+            'newsletter_accepted' => 'bool',
+            'gdpr_accepted' => 'bool',
+            'regulation_accepted' => 'bool',
         ];
     }
 
@@ -134,6 +134,13 @@ class Walker extends Model
             ->where('payment_date', '<', Carbon::parse(config('invoices.TRAIL_TSHIRT_ENDDATE')))
             ->orderBy('last_name', 'asc')
             ->orderBy('first_name', 'asc');
+    }
+
+    public static function withOutNumberTshirt(): Builder
+    {
+        return self::query()
+            ->whereNull('tshirt_number')
+            ->orderBy('walkers.registration_date', 'asc');
     }
 
 

@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('club_name')->nullable();
             $table->string('phone')->nullable();
             $table->string('number')->nullable();
-            $table->integer('tshirt_number')->nullable();
+            $table->integer('tshirt_number')->unique()->nullable();
             $table->string('tshirt_sex')->nullable();
             $table->string('tshirt_size')->default(TshirtEnum::NO->value)->nullable();
             $table->boolean('display_accepted')->default(false);

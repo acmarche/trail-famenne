@@ -91,7 +91,6 @@ class WalkerResource extends Resource
                             ->success()
                             ->send();
                         RegistrationProcessed::dispatch($record);
-
                     })
                     ->label(fn(Walker $record): string => $record->isPaid() ? 'Payé' : 'Payer')
                     ->tooltip(fn(Walker $record): string => $record->isPaid() ? '' : 'Payer')
