@@ -23,7 +23,11 @@ class Message extends Page implements HasForms
     protected static ?string $navigationGroup = 'Administration';
     protected static ?string $navigationIcon = 'tabler-message';
     protected static string $view = 'filament.pages.contact';
-    public array $formData = [];
+
+    //public array $formData = [];
+    public string $body = '';
+    public string $subject = '';
+    public bool $everyone = false;
 
     public function form(Form $form): Form
     {
@@ -33,10 +37,9 @@ class Message extends Page implements HasForms
                     ->label('Sujet')
                     ->required()
                     ->maxLength(150),
-                Forms\Components\Textarea::make('content')
+                Forms\Components\RichEditor::make('body')
                     ->label('Message')
                     ->required()
-                    ->rows(7)
                     ->minLength(50),
                 Forms\Components\Checkbox::make('everyone')
                     ->label('Envoyer à tous les participants')
@@ -45,20 +48,18 @@ class Message extends Page implements HasForms
                     Action::make('send')
                         ->label('Envoyer')
                         ->requiresConfirmation()
-                        ->action(function () {
-                            $data = $this->formData;
-                            $everyone = $data['everyone'] ?? false;
-                            $this->sendMessage($data['subject'], $data['content'], $everyone);
+                        ->action(function (array $data) {
+                            $this->sendMessage($this->subject, $this->body, $this->everyone);
                             Notification::make()
                                 ->title('Message envoyé')
                                 ->success()
                                 ->send();
-                            $this->formData = [];
+                            $this->body = '';
+                            $this->subject = '';
                         })
                         ->successRedirectUrl($this::getUrl()),
                 ]),
-            ])
-            ->statePath('formData');
+            ]);
     }
 
     public function getLayout(): string
@@ -97,6 +98,7 @@ class Message extends Page implements HasForms
                     ->danger()
                     ->send();
             }
+            break;
         }
     }
 }
