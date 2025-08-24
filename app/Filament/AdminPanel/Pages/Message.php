@@ -84,7 +84,7 @@ class Message extends Page implements HasForms
         }
         foreach ($emails as $email) {
             try {
-                Mail::to(new Address('jf@marche.be', $email))
+                Mail::to(new Address($email, $email))
                     ->send(
                         (new ContactMessage($message))
                             ->subject($subject)
