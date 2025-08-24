@@ -50,7 +50,7 @@
                         <td class="sm-p-6"
                             style="border-radius: 8px; background-color: #fffffe; padding: 24px 36px; border: 1px solid #e2e8f0">
                             <div style="margin: 0 0 24px; font-size: 16px; color: #475569">
-                                {{$content}}
+                                {!! nl2br(e($content)) !!}
                             </div>
                             <p style="margin: 0; font-size: 16px; line-height: 24px; color: #475569">
                                 &nbsp;
