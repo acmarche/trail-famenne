@@ -47,7 +47,8 @@ class Message extends Page implements HasForms
                         ->requiresConfirmation()
                         ->action(function () {
                             $data = $this->formData;
-                            $this->sendMessage($data['subject'], $data['content'], $data['everyone']);
+                            $everyone = $data['everyone'] ?? false;
+                            $this->sendMessage($data['subject'], $data['content'], $everyone);
                             Notification::make()
                                 ->title('Message envoyé')
                                 ->success()
