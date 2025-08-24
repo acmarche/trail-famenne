@@ -98,7 +98,6 @@ class Message extends Page implements HasForms
                     ->danger()
                     ->send();
             }
-            break;
         }
     }
 }
