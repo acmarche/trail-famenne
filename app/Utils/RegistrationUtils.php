@@ -3,6 +3,7 @@
 namespace App\Utils;
 
 use App\Models\Walker;
+use Illuminate\Database\Eloquent\Model;
 
 class RegistrationUtils
 {
@@ -16,7 +17,7 @@ class RegistrationUtils
         return $id;
     }
 
-    public static function generateNumber(Walker $currentWalker): void
+    public static function generateNumber(Walker|Model $currentWalker): void
     {
         // Get the maximum 'tshirt_number' from the 'walkers' table
         $lastTshirtNumber = Walker::max('tshirt_number');

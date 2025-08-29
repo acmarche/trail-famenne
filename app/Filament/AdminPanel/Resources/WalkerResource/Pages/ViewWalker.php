@@ -69,8 +69,10 @@ class ViewWalker extends ViewRecord
                                     ->label('Date de paiement')
                                     ->visible(fn(Walker $walker) => $walker->isPaid())
                                     ->dateTime(),
+                                Infolists\Components\TextEntry::make('tshirt_number')
+                                    ->label('Numéro de t-shirt'),
                                 Infolists\Components\TextEntry::make('tshirt_size')
-                                    ->label('T-shirt'),
+                                    ->label('Taille de t-shirt'),
                                 Infolists\Components\TextEntry::make('tshirt_sex')
                                     ->label('Découpe t-shirt'),
                                 Infolists\Components\TextEntry::make('registration_date')

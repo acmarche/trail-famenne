@@ -67,9 +67,14 @@ class WalkerResource extends Resource
                 Tables\Columns\TextColumn::make('is_paid')
                     ->label('Payé')
                     ->state(fn(Walker $walker) => $walker->isPaid() ? 'Oui' : 'Non'),
+                Tables\Columns\TextColumn::make('tshirt_number')
+                    ->label('Numéro de T-shirt')
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('registration_id')
                     ->label('Numéro d\'inscription')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('registration_date')
                     ->label('Date d\'inscription')
                     ->dateTime()
